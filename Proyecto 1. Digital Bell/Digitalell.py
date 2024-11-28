@@ -225,6 +225,17 @@ def Iniciar_Sesion():
     Inicio = tk.Button(ventana, text = "Iniciar Sesión", command = lambda: Verificar(Nom, Con,Tipo))
     Inicio.pack(pady = 5)
 
+def Cerrar_Sesion():
+    global nomos
+    Cerrar_Sesion = messagebox.askyesno("Digital Bell", "¿Desea cerrar sesión?")
+    if Cerrar_Sesion:
+        for widget in ventana.winfo_children:
+            widget.destroy()
+            nomos = ""
+            Menu()
+        else:
+            messagebox.showinfo("Digital Bell", "No se pudo cerrar sesión")
+
 def Menu_Habitante():
     global Usuario,nomos
 
@@ -240,7 +251,7 @@ def Menu_Habitante():
     Horarios = tk.Button(ventana, text = "Horarios y rutas del día", command = Horario_Habitante)
     Horarios.pack(side = tk.TOP, pady = 10,padx = 10)
 
-    Cerrar = tk.Button(ventana, text = "Cerrar Sesión", command = lambda: Cerrar_Sesion())
+    Cerrar = tk.Button(ventana, text = "Cerrar Sesión", command = Cerrar_Sesion)
     Cerrar.pack(side = tk.TOP)
 
 def Menu_Empleado():
@@ -271,6 +282,17 @@ def Menu_Empleado():
             
 def Menu_Admin():
     global Usuario,nomos
+
+    for widget in ventana.winfo_children:
+        widget.destroy()
+    
+    Texto = tk.Label(ventana, text = "Bienvenido Administrador", font = ("Myanmar Khyay", 15))
+    Texto.pack(side = tk.TOP, pady = 10)
+    Horario = tk.Button(ventana, text = "Horarios", command = Ingresar_Horarios, font = ("Myanmar Sans Pro", 10))
+    Horario.pack(side = tk.TOP, pady = 10)
+    Actualizar = tk.Button(ventana, text = "Actualizar ubicación", command = Actualizar_Ubiacion, font = ("Myanmar Sans Pro", 10))
+    Actualizar.pack(side = tk.TOP, pady = 10)
+    Queja = tk.Button(ventana, text = "Quejas y sugerencias", commando = Quejas, font = ("Myanmar Sans Pro", 10))
     
 
 Texto = tk.Label(ventana, text = "Bienvenid@ a Digital Bell", font = ("Myanmar Khyay",20))
