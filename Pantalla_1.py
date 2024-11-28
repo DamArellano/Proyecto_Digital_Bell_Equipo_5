@@ -39,7 +39,7 @@ def Registro(ventana,callback):
             callback(tipo) 
             Registro.destroy()
     
-    EnviarO = tk.Button(Registro, text = "Enviar", command = Seleccion)
+    EnviarO = tk.Button(Registro, text = "Siguiente", command = Seleccion)
     EnviarO.pack(pady=10)
 
 def Registrar_Usuario(tipo):
@@ -148,7 +148,7 @@ def Registrar_Usuario(tipo):
         Registrar = tk.Button(ventana,text = "Ingresar", command = Agregar, font=("Myanmar Sans Pro", 10))
         Registrar.grid(row = 9, column = 0, padx = 10, pady = 10)
 
-        Cancelar = tk.Button(ventana, text = "Cancelar", command = Menu, font=("Myanmar Sans Pro", 10))
+        Cancelar = tk.Button(ventana, text = "Regresar", command = Menu, font=("Myanmar Sans Pro", 10))
         Cancelar.grid(row = 9, column = 1, padx = 10, pady = 10)
     
     elif tipo == "Empleado":
@@ -173,7 +173,7 @@ def Registrar_Usuario(tipo):
         Registrar = tk.Button(ventana,text = "Ingresar", command = Agregar, font=("Myanmar Sans Pro", 15))
         Registrar.grid(row = 4, column = 0, padx = 10, pady = 10)
 
-        Cancelar = tk.Button(ventana, text = "Cancelar", command = Menu, font=("Myanmar Sans Pro", 15))
+        Cancelar = tk.Button(ventana, text = "Regresar", command = Menu, font=("Myanmar Sans Pro", 15))
         Cancelar.grid(row = 4, column = 1, padx = 10, pady = 10)
 
 def Iniciar_Sesion():
@@ -273,13 +273,6 @@ def Menu_Admin():
     global Usuario,nomos
     
 
-Texto = tk.Label(ventana, text = "Bienvenid@ a Digital Bell", font = ("Myanmar Khyay",20))
-Texto.pack(side = tk.TOP, pady = 10)
-Registra = tk.Button(ventana, text = "Crear cuenta", command = lambda: Registro(ventana,Registrar_Usuario), font = ("Myanmar Sans Pro", 15))
-Registra.pack(side = tk.TOP, pady = 10,padx = 10)
-Sesion = tk.Button(ventana, text = "Iniciar Sesión", command = Iniciar_Sesion, font = ("Myanmar Sans Pro", 15))
-Sesion.pack(side = tk.TOP, pady = 10,padx = 10)
-Salir = tk.Button(ventana, text = "Salir", command = ventana.quit, font = ("Myanmar Sans Pro", 15))
-Salir.pack(pady = 5)
+Menu()
 
 ventana.mainloop()
