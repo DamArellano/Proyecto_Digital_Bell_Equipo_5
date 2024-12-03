@@ -1,12 +1,15 @@
 import tkinter as tk
 from tkinter import messagebox
+from Habitante import *
+from Empleado import *
+from Administrador import *
 ventana = tk.Tk()
 ventana.title("Digital Bell")
 ventana.geometry("500x500")
 Usuario = []
 Queja = []
 Horario = []
-global nomos
+nomos = ""
 
 def Menu():
     for widget in ventana.winfo_children():
@@ -226,3 +229,14 @@ def Iniciar_Sesion():
     Inicio.pack(pady = 5)
     Cancelar = tk.Button(ventana, text = "Cancelar", command = Menu, font=("Myanmar Sans Pro", 10))
     Cancelar.grid(row = 9, column = 1, padx = 10, pady = 10)
+
+Texto = tk.Label(ventana, text = "Bienvenid@ a Digital Bell", font = ("Myanmar Khyay",20))
+Texto.pack(side = tk.TOP, pady = 10)
+Registra = tk.Button(ventana, text = "Crear cuenta", command = lambda: Registro(ventana,Registrar_Usuario), font = ("Myanmar Sans Pro", 15))
+Registra.pack(side = tk.TOP, pady = 10,padx = 10)
+Sesion = tk.Button(ventana, text = "Iniciar Sesión", command = Iniciar_Sesion, font = ("Myanmar Sans Pro", 15))
+Sesion.pack(side = tk.TOP, pady = 10,padx = 10)
+Salir = tk.Button(ventana, text = "Salir", command = ventana.quit, font = ("Myanmar Sans Pro", 15))
+Salir.pack(pady = 5)
+
+ventana.mainloop()
