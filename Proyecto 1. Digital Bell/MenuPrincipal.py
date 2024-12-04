@@ -53,7 +53,6 @@ def Registrar_Usuario(tipo):
 
     from Habitante import Menu_Habitante
     from Empleado import Menu_Empleado
-    from Administrador import Menu_Administrador
 
     def Agregar():
         global Usuario,nomos
@@ -188,6 +187,10 @@ def Iniciar_Sesion():
 
     for widget in ventana.winfo_children():
         widget.destroy()
+
+    from Habitante import Menu_Habitante
+    from Empleado import Menu_Empleado
+    from Administrador import Menu_Administrador
 
     def Verificar(Nom, Con, Tipo):
         global Usuario, nomos
