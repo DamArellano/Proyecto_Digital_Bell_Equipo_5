@@ -54,7 +54,10 @@ def Registrar_Usuario(tipo):
             Nombre = Nom.get()
             Direccion = Dir.get()
             Numero_Exterior = Ne.get()
-            Numero_Interior = Ni.get()
+            if Ni != "":
+                Numero_Interior = Ni.get()
+            else:
+                Numero_Interior = ""
             Telefono = Num.get()
             Colonia = Col.get()
             Alcaldia = Al.get()
@@ -106,7 +109,7 @@ def Registrar_Usuario(tipo):
         Nom = tk.Entry(ventana, width = 30)
         Nom.grid(row = 1, column = 1, padx = 10, pady = 10, sticky = "w")
 
-        Texto2 = tk.Label(ventana, text = "Direccion:", font=("Myanmar Sans Pro", 10))
+        Texto2 = tk.Label(ventana, text = "Calle:", font=("Myanmar Sans Pro", 10))
         Texto2.grid(row = 2, column = 0, padx = 10, pady = 10)
         Dir = tk.Entry(ventana, width = 30)
         Dir.grid(row = 2, column= 1 ,padx = 10, pady = 10, sticky = "w")
@@ -225,7 +228,7 @@ def Iniciar_Sesion():
     Inicio = tk.Button(ventana, text = "Iniciar Sesión", command = lambda: Verificar(Nom, Con,Tipo))
     Inicio.pack(pady = 5)
     Cancelar = tk.Button(ventana, text = "Cancelar", command = Menu, font=("Myanmar Sans Pro", 10))
-    Cancelar.grid(row = 9, column = 1, padx = 10, pady = 10)
+    Cancelar.pack(side = tk.TOP, pady = 5)
 
 def Cerrar_Sesion():
     global nomos

@@ -60,7 +60,10 @@ def Registrar_Usuario(tipo):
             Nombre = Nom.get()
             Direccion = Dir.get()
             Numero_Exterior = Ne.get()
-            Numero_Interior = Ni.get()
+            if Ni != "":
+                Numero_Interior = Ni.get()
+            else:
+                Numero_Interior = ""
             Telefono = Num.get()
             Colonia = Col.get()
             Alcaldia = Al.get()
@@ -112,7 +115,7 @@ def Registrar_Usuario(tipo):
         Nom = tk.Entry(ventana, width = 30)
         Nom.grid(row = 1, column = 1, padx = 10, pady = 10, sticky = "w")
 
-        Texto2 = tk.Label(ventana, text = "Direccion:", font=("Myanmar Sans Pro", 10))
+        Texto2 = tk.Label(ventana, text = "Calle:", font=("Myanmar Sans Pro", 10))
         Texto2.grid(row = 2, column = 0, padx = 10, pady = 10)
         Dir = tk.Entry(ventana, width = 30)
         Dir.grid(row = 2, column= 1 ,padx = 10, pady = 10, sticky = "w")
@@ -190,7 +193,7 @@ def Iniciar_Sesion():
 
     from Habitante import Menu_Habitante
     from Empleado import Menu_Empleado
-    from Administrador import Menu_Administrador
+    from Administrador import Menu_Admin
 
     def Verificar(Nom, Con, Tipo):
         global Usuario, nomos
