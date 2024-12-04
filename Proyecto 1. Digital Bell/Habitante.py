@@ -1,12 +1,3 @@
-import tkinter as tk
-from tkinter import messagebox
-ventana = tk.Tk()
-ventana.title("Digital Bell")
-ventana.geometry("500x500")
-Usuario = []
-Queja = []
-Horario = []
-global nomos
 def Menu_Habitante():
     global Usuario,nomos
 

@@ -1,8 +1,8 @@
 import tkinter as tk
 from tkinter import messagebox
-from Habitante import *
-from Empleado import *
-from Administrador import *
+import Habitante
+import Empleado
+import Administrador
 ventana = tk.Tk()
 ventana.title("Digital Bell")
 ventana.geometry("500x500")
@@ -50,6 +50,10 @@ def Registrar_Usuario(tipo):
 
     for widget in ventana.winfo_children():
         widget.destroy()
+
+    from Habitante import Menu_Habitante
+    from Empleado import Menu_Empleado
+    from Administrador import Menu_Administrador
 
     def Agregar():
         global Usuario,nomos
@@ -226,9 +230,9 @@ def Iniciar_Sesion():
     Tipo.pack(pady = 5)
 
     Inicio = tk.Button(ventana, text = "Iniciar Sesión", command = lambda: Verificar(Nom, Con,Tipo))
-    Inicio.pack(pady = 5)
+    Inicio.pack(side = tk.TOP, pady = 5)
     Cancelar = tk.Button(ventana, text = "Cancelar", command = Menu, font=("Myanmar Sans Pro", 10))
-    Cancelar.grid(row = 9, column = 1, padx = 10, pady = 10)
+    Cancelar.pack(side = tk.TOP, pady = 5)
 
 Texto = tk.Label(ventana, text = "Bienvenid@ a Digital Bell", font = ("Myanmar Khyay",20))
 Texto.pack(side = tk.TOP, pady = 10)
@@ -239,4 +243,5 @@ Sesion.pack(side = tk.TOP, pady = 10,padx = 10)
 Salir = tk.Button(ventana, text = "Salir", command = ventana.quit, font = ("Myanmar Sans Pro", 15))
 Salir.pack(pady = 5)
 
-ventana.mainloop()
+if __name__ == "__main__":
+    ventana.mainloop()
