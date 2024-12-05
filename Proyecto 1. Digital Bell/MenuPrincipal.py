@@ -5,8 +5,10 @@ import Empleado2
 import Administrador2
 
 ventana = tk.Tk()
+screen_width = ventana.winfo_screenwidth()
+screen_height = ventana.winfo_screenheight()
 ventana.title("Digital Bell")
-ventana.geometry("500x500")
+ventana.geometry(f"{screen_width}x{screen_height}")
 Usuario = []
 Queja = []
 Horario = []
