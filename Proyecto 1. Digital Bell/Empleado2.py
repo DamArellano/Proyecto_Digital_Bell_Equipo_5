@@ -1,3 +1,11 @@
+import tkinter as tk
+from tkinter import messagebox
+
+Usuario = []
+Queja = []
+Horario = []
+nomos = ""
+
 def Menu_Empleado():
     global Usuario,nomos
 

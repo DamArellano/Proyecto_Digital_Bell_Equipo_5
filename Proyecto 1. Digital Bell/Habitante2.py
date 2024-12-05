@@ -1,3 +1,10 @@
+import tkinter as tk
+from tkinter import messagebox
+
+Usuario = []
+Queja = []
+Horario = []
+nomos = ""
 def Menu_Habitante():
     global Usuario,nomos
 
@@ -66,5 +73,3 @@ def Menu_Habitante():
         else:
             messagebox.showinfo("Digital Bell", "No se pudo cerrar sesión")
     ventana.mainloop()
-
-Habitante
