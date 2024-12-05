@@ -83,11 +83,29 @@ def Administrador():
         for widget in ventana.winfo_children:
             widget.destroy()
         
+        def Actualizar():
+            global Horario
+            Empleado = Num.get()
+            Ubicacion = Lugar.get()
+
+            for Ruta in Horario:
+                if Ruta["Empleado"] == Empleado:
+                    Ruta["Ubicacion"] = Ubicacion
+                    messagebox.showinfo("Ubicación", "Ubicación actualizada con éxito")
+                    Menu_Admin
+        
         Texto = tk.Label(ventana, text = "Ingrese el número de empleado")
         Texto.pack(side = tk.TOP, pady = 10)
         Num = tk.Entry(ventana)
         Num.pack(side = tk.TOP, pady = 10)
-        
+        Texto1 = tk.Label(ventana, text = "Ingrese su ubicación actual")
+        Texto1.pack(side = tk.TOP, pady = 10)
+        Lugar = tk.Text(ventana, height = 5, width = 10)
+        Lugar.pack(side = tk.TOP, pady = 10)
+        Cambia = tk.Button(ventana, text = "Actualizar ubicación", command = lambda: Actualizar())
+        Cambia.pack(side = tk.TOP, pady = 10)
+        Regresar = tk.Button(ventana, text = "Regresar", command = Menu_Admin)
+        Regresar.pack(side = tk.TOP, pady = 10)
 
     def Quejas():
         global Queja
