@@ -1,8 +1,9 @@
 import tkinter as tk
 from tkinter import messagebox
-import Habitante
-import Empleado
-import Administrador
+import Habitante2
+import Empleado2
+import Administrador2
+
 ventana = tk.Tk()
 ventana.title("Digital Bell")
 ventana.geometry("500x500")
