@@ -54,9 +54,6 @@ def Registrar_Usuario(tipo):
     for widget in ventana.winfo_children():
         widget.destroy()
 
-    from Habitante2 import Menu_Habitante
-    from Empleado2 import Menu_Empleado
-
     def Agregar():
         global Usuario,nomos
         if tipo == "Usuario":
@@ -88,7 +85,7 @@ def Registrar_Usuario(tipo):
             Usuario.append(Habitante)
             messagebox.showinfo("Digital Bell", "Se ha agregado un nuevo usuario")
             nomos = Nombre
-            Menu_Habitante()
+            Habitante2.Menu_Habitante()
         
         elif tipo == "Empleado":
             Nombre = Nom.get()
@@ -104,7 +101,7 @@ def Registrar_Usuario(tipo):
             Usuario.append(Empleado)
             messagebox.showinfo("Digital Bell", "Se ha agregado un empleado")
             nomos = Nombre
-            Menu_Empleado()
+            Empleado2.Menu_Empleado()
         
         else:
             messagebox.showerror("Digital Bell", "Tipo de usuario no reconocido")
@@ -194,31 +191,28 @@ def Iniciar_Sesion():
     for widget in ventana.winfo_children():
         widget.destroy()
 
-    from Habitante2 import Menu_Habitante
-    from Empleado2 import Menu_Empleado
-    from Administrador2 import Menu_Admin
 
     def Verificar(Nom, Con, Tipo):
         global Usuario, nomos
         if Tipo == "Usuario":
             for Habitante in Usuario:
-                if Habitante['nombre'] == Nom.get() and Habitante['contraseña'] == Con.get():
+                if Habitante['Nombre'] == Nom.get() and Habitante['Contraseña'] == Con.get():
                     nomos = Nom.get()
                     messagebox.showinfo("Digital Bell", "Bienvenido " + Nom.get())
-                    Menu_Habitante
+                    Habitante2.Menu_Habitante()
             
 
         elif Tipo == "Empleado":
             if Nom.get() == "Arellano" and Con.get() == "1234":
                 nomos = Nom.get()
                 messagebox.showinfo("Digital Bell", "Bienvenido administrador")
-                Menu_Admin
+                Administrador2.Menu_Admin()
             else:
                 for Empleado in Usuario:
-                    if Empleado['nombre'] == Nom.get() and Empleado['contraseña'] == Con.get():
+                    if Empleado['Nombre'] == Nom.get() and Empleado['Contraseña'] == Con.get():
                         nomos = Nom.get()
                         messagebox.showinfo("Digital Bell", "Bienvenido " + Nom.get())
-                        Menu_Empleado
+                        Empleado2.Menu_Empleado()
 
     Texto1 = tk.Label(ventana,text = "Ingrese su nombre de usuario", font=("Myanmar Sans Pro", 10))
     Texto1.pack(pady = 5)
