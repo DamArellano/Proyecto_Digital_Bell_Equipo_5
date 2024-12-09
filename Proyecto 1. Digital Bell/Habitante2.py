@@ -1,29 +1,27 @@
 import tkinter as tk
 from tkinter import messagebox
 
-def Habitante():
-    ventana = tk.Tk()
-    ventana.title("Digital Bell")
-    ventana.geometry("500x500")
-    from MenuPrincipal import Menu
-    
-    def Menu_Habitante():
-        global Usuario,nomos
+Usuario = []
+Queja = []
+Horario = []
+nomos = ""
+def Menu_Habitante():
+    global Usuario,nomos
 
-        for widget in ventana.winfo_children():
+    for widget in ventana.winfo_children():
             widget.destroy()
     
-        Texto = tk.Label(ventana, text = ("Bienvenido ",nomos), font = ("Myanmar Khyay", 15))
-        Texto.pack(side = tk.TOP)
+    Texto = tk.Label(ventana, text = ("Bienvenido ",nomos), font = ("Myanmar Khyay", 15))
+    Texto.pack(side = tk.TOP)
 
-        Sugerencias = tk.Button(ventana, text = "Quejas y Sugerencias", command = Quejas_Habitante, font = ("Myanmar Sans Pro", 10))
-        Sugerencias.pack(side = tk.TOP, pady = 10,padx = 10)
+    Sugerencias = tk.Button(ventana, text = "Quejas y Sugerencias", command = Quejas_Habitante, font = ("Myanmar Sans Pro", 10))
+    Sugerencias.pack(side = tk.TOP, pady = 10,padx = 10)
 
-        Horarios = tk.Button(ventana, text = "Horarios y rutas del día", command = Horario_Habitante)
-        Horarios.pack(side = tk.TOP, pady = 10,padx = 10)
+    Horarios = tk.Button(ventana, text = "Horarios y rutas del día", command = Horario_Habitante)
+    Horarios.pack(side = tk.TOP, pady = 10,padx = 10)
 
-        Cerrar = tk.Button(ventana, text = "Cerrar Sesión", command = Cerrar_Sesion)
-        Cerrar.pack(side = tk.TOP)
+    Cerrar = tk.Button(ventana, text = "Cerrar Sesión", command = Cerrar_Sesion)
+    Cerrar.pack(side = tk.TOP)
 
     def Quejas_Habitante():
         global Usuario,nomos
@@ -75,5 +73,3 @@ def Habitante():
         else:
             messagebox.showinfo("Digital Bell", "No se pudo cerrar sesión")
     ventana.mainloop()
-
-Habitante

@@ -1,28 +1,19 @@
 import tkinter as tk
 from tkinter import messagebox
 
-def Administrador():
-    ventana = tk.Tk()
-    ventana.title("Digital Bell")
-    ventana.geometry("500x500")
-    from MenuPrincipal import Menu
-
-    def Menu_Admin():
-        global Usuario,nomos
-
-        for widget in ventana.winfo_children:
+    for widget in ventana.winfo_children:
             widget.destroy()
     
-        Texto = tk.Label(ventana, text = "Bienvenido Administrador", font = ("Myanmar Khyay", 15))
-        Texto.pack(side = tk.TOP, pady = 10)
-        Horario = tk.Button(ventana, text = "Horarios", command = Ingresar_Horarios, font = ("Myanmar Sans Pro", 10))
-        Horario.pack(side = tk.TOP, pady = 10)
-        Actualizar = tk.Button(ventana, text = "Actualizar ubicación", command = Actualizar_Ubicacion, font = ("Myanmar Sans Pro", 10))
-        Actualizar.pack(side = tk.TOP, pady = 10)
-        Queja = tk.Button(ventana, text = "Quejas y sugerencias", commando = Quejas, font = ("Myanmar Sans Pro", 10))
-        Queja.pack(side = tk.TOP, pady = 10)
-        Cerrar = tk.Button(ventana, text = "Cerrar Sesión", command = Cerrar_Sesion)
-        Cerrar.pack(side = tk.TOP, pady = 10)
+    Texto = tk.Label(ventana, text = "Bienvenido Administrador", font = ("Myanmar Khyay", 15))
+    Texto.pack(side = tk.TOP, pady = 10)
+    Horario = tk.Button(ventana, text = "Horarios", command = Ingresar_Horarios, font = ("Myanmar Sans Pro", 10))
+    Horario.pack(side = tk.TOP, pady = 10)
+    Actualizar = tk.Button(ventana, text = "Actualizar ubicación", command = Actualizar_Ubicacion, font = ("Myanmar Sans Pro", 10))
+    Actualizar.pack(side = tk.TOP, pady = 10)
+    Queja = tk.Button(ventana, text = "Quejas y sugerencias", commando = Quejas, font = ("Myanmar Sans Pro", 10))
+    Queja.pack(side = tk.TOP, pady = 10)
+    Cerrar = tk.Button(ventana, text = "Cerrar Sesión", command = Cerrar_Sesion)
+    Cerrar.pack(side = tk.TOP, pady = 10)
 
     #Para horarios se requiere: Grafos
     def Ingresar_Horarios():

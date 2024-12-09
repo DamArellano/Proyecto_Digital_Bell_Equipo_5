@@ -213,6 +213,7 @@ def crear_interfaz(logica_programa):
         def Guardar_Queja():
             global nomos
             logica_programa["Enviar_Queja"](Sugerencia,nomos,Queja)
+            Sugerencia.delete(0, tk.END)
             messagebox.showinfo("Quejas y Sugerencias","Queja registrada exitosamente")
 
         Texto = tk.Label(ventana, text = ("Quejas y sugerencias"), font = ("Myanmar Khyay", 15))
