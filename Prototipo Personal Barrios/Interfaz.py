@@ -7,6 +7,15 @@ def crear_interfaz(logica_programa):
     ventana.title("Digital Bell")
     ventana.geometry("500x500")
     
+    Texto = tk.Label(ventana, text = "Bienvenid@ a Digital Bell", font = ("Myanmar Khyay",20))
+    Texto.pack(side = tk.TOP, pady = 10)
+    Registra = tk.Button(ventana, text = "Crear cuenta", command = lambda: Registro(ventana,Registrar_Usuario), font = ("Myanmar Sans Pro", 15))
+    Registra.pack(side = tk.TOP, pady = 10,padx = 10)
+    Sesion = tk.Button(ventana, text = "Iniciar Sesión", command = Iniciar_Sesion, font = ("Myanmar Sans Pro", 15))
+    Sesion.pack(side = tk.TOP, pady = 10,padx = 10)
+    Salir = tk.Button(ventana, text = "Salir", command = ventana.quit, font = ("Myanmar Sans Pro", 15))
+    Salir.pack(pady = 5)
+
     #La primer función de todas
     def Menu():
         for widget in ventana.winfo_children():
@@ -36,6 +45,19 @@ def crear_interfaz(logica_programa):
         for widget in ventana.winfo_children():
             widget.destroy()
         
+        def Agregar():
+            global Usuario,nomos
+            if tipo == "Usuario":
+                logica_programa["Registro_Habitante"](Nom,Dir,Ne,Ni,Num,Col,Al,Cp,Con,Usuario)
+                Menu_Habitante
+        
+            elif tipo == "Empleado":
+                logica_programa["Registro_Empleado"](Nom,Num,Con,Usuario)
+                Menu_Empleado
+        
+            else:
+                messagebox.showerror("Digital Bell", "Tipo de usuario no reconocido")
+
         if tipo == "Habitante":
             Texto = tk.Label(ventana, text = "Ingrese sus datos", font=("Myanmar Khyay", 15))
             Texto.grid(row = 0, column = 0, padx = 10, pady = 10)
@@ -119,6 +141,28 @@ def crear_interfaz(logica_programa):
         for widget in ventana.winfo_children():
             widget.destroy()
         
+        def Verificar(Nom, Con, Tipo):
+            global Usuario, nomos
+            if Tipo == "Usuario":
+                for Habitante in Usuario:
+                    if Habitante['nombre'] == Nom.get() and Habitante['contraseña'] == Con.get():
+                        nomos = Nom.get()
+                        messagebox.showinfo("Digital Bell", "Bienvenido " + Nom.get())
+                        Menu_Habitante
+            
+
+            elif Tipo == "Empleado":
+                if Nom.get() == "Arellano" and Con.get() == "1234":
+                    nomos = Nom.get()
+                    messagebox.showinfo("Digital Bell", "Bienvenido administrador")
+                    Menu_Admin
+                else:
+                    for Empleado in Usuario:
+                        if Empleado['nombre'] == Nom.get() and Empleado['contraseña'] == Con.get():
+                            nomos = Nom.get()
+                            messagebox.showinfo("Digital Bell", "Bienvenido " + Nom.get())
+                            Menu_Empleado
+
         Texto1 = tk.Label(ventana,text = "Ingrese su nombre de usuario", font=("Myanmar Sans Pro", 10))
         Texto1.pack(pady = 5)
         Nom = tk.Entry(ventana)
@@ -291,6 +335,7 @@ def crear_interfaz(logica_programa):
         global nomos
         Cerrar_Sesion = messagebox.askyesno("Digital Bell", "¿Desea cerrar sesión?")
         if Cerrar_Sesion:
+            nomos = ""
             Menu()
         else:
             messagebox.showinfo("Digital Bell", "No se pudo cerrar sesión")
