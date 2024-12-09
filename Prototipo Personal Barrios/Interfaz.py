@@ -36,12 +36,12 @@ def crear_interfaz(logica_programa):
         
         Texto = tk.Label(ventana, text = "Elija el tipo de usuario a registrar", font = ("Myanmar Khyay",20))
         Texto.pack(pady = 10)
-        Habitante = tk.Button(ventana, text = "Habitante", command = lambda: Registrar_Usuario(ventana,tipo = "Habitante"), font = ("Myanmar Sans Pro",15))
+        Habitante = tk.Button(ventana, text = "Habitante", command = lambda: Registrar_Usuario(tipo = "Habitante"), font = ("Myanmar Sans Pro",15))
         Habitante.pack(side = tk.LEFT, padx = 10)
-        Empleado = tk.Button(ventana, text = "Empleado", command = lambda: Registrar_Usuario(ventana, tipo = "Empleado"), font = ("Myanmar Sans Pro",15))
+        Empleado = tk.Button(ventana, text = "Empleado", command = lambda: Registrar_Usuario(tipo = "Empleado"), font = ("Myanmar Sans Pro",15))
         Empleado.pack(side = tk.LEFT, padx = 10)
     
-    def Registrar_Usuario(ventana, tipo):
+    def Registrar_Usuario(tipo):
         for widget in ventana.winfo_children():
             widget.destroy()
         
@@ -226,14 +226,21 @@ def crear_interfaz(logica_programa):
         Regresar.pack(side = tk.TOP, pady = 10)
     
     def Horario_Habitante():
+
         for widget in ventana.winfo_children():
             widget.destroy()
-        
+
         Titulo = tk.Label(ventana, text = "Horarios del día", font = ("Myanmar Khyay", 20))
         Titulo.pack(side = tk.TOP, pady = 10)
-
         Regresar = tk.Button(ventana, text = "Volver al menu", command = Menu_Habitante, font=("Myanmar Sans Pro", 10))
         Regresar.pack(side = tk.TOP, pady = 10)
+
+        for Ruta in Horario:
+            Ubicación = tk.Label(ventana, text = ("Ubicación actual:",Ruta))
+            Ubicación.pack(side = tk.TOP, pady = 10)
+            
+
+        logica_programa["Mostrar_Horarios"]
     
     #A partir de aquí comienza la sección de empleados
     #Como se puede ver, el empleado solo tendrá una función ya que solo tiene que ver el horario asignado
@@ -269,10 +276,13 @@ def crear_interfaz(logica_programa):
         for widget in ventana.winfo_children:
             widget.destroy()
         
+        def Asignar_Horarios(Num,Partida,Calle2,Calle3,Calle4):
+            logica_programa["Horarios"](Num,Partida,Calle2,Calle3,Calle4)
+
         #Los horarios de este programa estarán compuestos por tres calles
         Texto = tk.Label(ventana, text = "Horarios y rutas")
         Texto.pack(side = tk.TOP, pady = 10)
-        Texto1 = tk.Label(ventana, text = "Número de Empleado")
+        Texto1 = tk.Label(ventana, text = "Número de Empleado a asignar")
         Texto1.pack(side = tk.TOP, pady = 10)
         Num = tk.Entry(ventana)
         Num.pack(side = tk.TOP, pady = 10)
@@ -280,20 +290,20 @@ def crear_interfaz(logica_programa):
         Texto5.pack(side = tk.TOP, pady = 10)
         Partida = tk.Entry(ventana)
         Partida.pack(side = tk.TOP, pady = 10)
-        Texto2 = tk.Label(ventana, text = "Ingrese la primer dirección")
+        Texto2 = tk.Label(ventana, text = "Ingrese la segunda dirección")
         Texto2.pack(side = tk.TOP, pady = 10)
-        Calle1 = tk.Entry(ventana)
-        Calle1.pack(side = tk.TOP, pady = 10)
-        Texto3 = tk.Label(ventana, text = "Ingrese la segunda dirección")
-        Texto3.pack(side = tk.TOP, pady = 10)
         Calle2 = tk.Entry(ventana)
         Calle2.pack(side = tk.TOP, pady = 10)
-        Texto4 = tk.Label(ventana, text = "Ingrese la tercer dirección")
-        Texto4.pack(side = tk.TOP, pady = 10)
+        Texto3 = tk.Label(ventana, text = "Ingrese la tercera dirección")
+        Texto3.pack(side = tk.TOP, pady = 10)
         Calle3 = tk.Entry(ventana)
         Calle3.pack(side = tk.TOP, pady = 10)
+        Texto4 = tk.Label(ventana, text = "Ingrese la cuarta dirección")
+        Texto4.pack(side = tk.TOP, pady = 10)
+        Calle4 = tk.Entry(ventana)
+        Calle4.pack(side = tk.TOP, pady = 10)
 
-        Asignar = tk.Button(ventana, text = "Asignar horarios", command = lambda: Asignar_Horarios())
+        Asignar = tk.Button(ventana, text = "Asignar horarios", command = lambda: Asignar_Horarios(Num,Partida,Calle2,Calle3,Calle4))
         Asignar.pack(side = tk.TOP, pady = 10)
         Regresar = tk.Button(ventana, text = "Regresar", command = Menu_Admin)
         Regresar.pack(side = tk.TOP, pady = 10)
