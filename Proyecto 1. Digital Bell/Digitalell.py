@@ -2,7 +2,7 @@ import tkinter as tk
 from tkinter import messagebox
 ventana = tk.Tk()
 ventana.title("Digital Bell")
-ventana.geometry("500x500")
+ventana.geometry("1800x800")
 Usuario = []
 Queja = []
 Horario = []

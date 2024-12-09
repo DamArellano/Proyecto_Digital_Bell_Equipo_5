@@ -1,8 +1,11 @@
 import tkinter as tk
 from tkinter import messagebox
-import Habitante
-import Empleado
-import Administrador
+import Habitante2
+import Empleado2
+import Administrador2
+from Habitante2 import *
+from Empleado2 import *
+from Administrador2 import *
 ventana = tk.Tk()
 ventana.title("Digital Bell")
 ventana.geometry("500x500")
@@ -42,7 +45,7 @@ def Registro(ventana,callback):
             callback(tipo) 
             Registro.destroy()
     
-    EnviarO = tk.Button(Registro, text = "Enviar", command = Seleccion)
+    EnviarO = tk.Button(Registro, text = "Siguiente", command = Seleccion)
     EnviarO.pack(pady=10)
 
 def Registrar_Usuario(tipo):
@@ -50,9 +53,6 @@ def Registrar_Usuario(tipo):
 
     for widget in ventana.winfo_children():
         widget.destroy()
-
-    from Habitante import Menu_Habitante
-    from Empleado import Menu_Empleado
 
     def Agregar():
         global Usuario,nomos
@@ -190,10 +190,6 @@ def Iniciar_Sesion():
 
     for widget in ventana.winfo_children():
         widget.destroy()
-
-    from Habitante import Menu_Habitante
-    from Empleado import Menu_Empleado
-    from Administrador import Menu_Admin
 
     def Verificar(Nom, Con, Tipo):
         global Usuario, nomos

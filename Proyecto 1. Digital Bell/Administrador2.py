@@ -1,6 +1,5 @@
 import tkinter as tk
 from tkinter import messagebox
-from MenuPrincipal import nomos,Usuario,Queja,Horario
 
 def Administrador():
     ventana = tk.Tk()
