@@ -1,15 +1,13 @@
-import tkinter as tk
+# Crear un grafo usando una lista de adyacencia
+grafo = {
+    "A": ["B", "C"],
+    "B": ["A", "C"],
+    "C": ["A", "B"]
+}
 
-# Crear la ventana principal
-root = tk.Tk()
-root.title("Ejemplo de tk.Text")
+# Función para mostrar el grafo
+def mostrar_grafo(grafo):
+    for vertice, adyacentes in grafo.items():
+        print(f"{vertice}: {', '.join(adyacentes)}")
 
-# Crear un widget Text
-text_widget = tk.Text(root, height=10, width=40)
-text_widget.pack()
-
-# Agregar algo de texto inicial
-text_widget.insert(tk.END, "Escribe aquí tu texto...\n")
-
-# Iniciar el bucle principal
-root.mainloop()
+mostrar_grafo(grafo)
