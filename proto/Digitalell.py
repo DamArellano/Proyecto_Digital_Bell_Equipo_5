@@ -1,17 +1,12 @@
 import tkinter as tk
 from tkinter import messagebox
-import Habitante2
-import Empleado2
-import Administrador2
 ventana = tk.Tk()
-screen_width = ventana.winfo_screenwidth()
-screen_height = ventana.winfo_screenheight()
 ventana.title("Digital Bell")
-ventana.geometry(f"{screen_width}x{screen_height}")
+ventana.geometry("500x500")
 Usuario = []
 Queja = []
 Horario = []
-nomos = ""
+global nomos
 
 def Menu():
     for widget in ventana.winfo_children():
@@ -44,7 +39,7 @@ def Registro(ventana,callback):
             callback(tipo) 
             Registro.destroy()
     
-    EnviarO = tk.Button(Registro, text = "Siguiente", command = Seleccion)
+    EnviarO = tk.Button(Registro, text = "Enviar", command = Seleccion)
     EnviarO.pack(pady=10)
 
 def Registrar_Usuario(tipo):
@@ -84,7 +79,7 @@ def Registrar_Usuario(tipo):
             Usuario.append(Habitante)
             messagebox.showinfo("Digital Bell", "Se ha agregado un nuevo usuario")
             nomos = Nombre
-            Habitante2.Menu_Habitante()
+            Menu_Habitante()
         
         elif tipo == "Empleado":
             Nombre = Nom.get()
@@ -100,7 +95,7 @@ def Registrar_Usuario(tipo):
             Usuario.append(Empleado)
             messagebox.showinfo("Digital Bell", "Se ha agregado un empleado")
             nomos = Nombre
-            Empleado2.Menu_Empleado()
+            Menu_Empleado()
         
         else:
             messagebox.showerror("Digital Bell", "Tipo de usuario no reconocido")
@@ -189,28 +184,28 @@ def Iniciar_Sesion():
 
     for widget in ventana.winfo_children():
         widget.destroy()
-       
+
     def Verificar(Nom, Con, Tipo):
         global Usuario, nomos
         if Tipo == "Usuario":
             for Habitante in Usuario:
-                if Habitante['Nombre'] == Nom.get() and Habitante['Contraseña'] == Con.get():
+                if Habitante['nombre'] == Nom.get() and Habitante['contraseña'] == Con.get():
                     nomos = Nom.get()
                     messagebox.showinfo("Digital Bell", "Bienvenido " + Nom.get())
-                    Habitante2.Menu_Habitante()
+                    Menu_Habitante
             
 
         elif Tipo == "Empleado":
             if Nom.get() == "Arellano" and Con.get() == "1234":
                 nomos = Nom.get()
                 messagebox.showinfo("Digital Bell", "Bienvenido administrador")
-                Administrador2.Menu_Admin()
+                Menu_Admin
             else:
                 for Empleado in Usuario:
-                    if Empleado['Nombre'] == Nom.get() and Empleado['Contraseña'] == Con.get():
+                    if Empleado['nombre'] == Nom.get() and Empleado['contraseña'] == Con.get():
                         nomos = Nom.get()
                         messagebox.showinfo("Digital Bell", "Bienvenido " + Nom.get())
-                        Empleado2.Menu_Empleado()
+                        Menu_Empleado
 
     Texto1 = tk.Label(ventana,text = "Ingrese su nombre de usuario", font=("Myanmar Sans Pro", 10))
     Texto1.pack(pady = 5)
@@ -231,9 +226,121 @@ def Iniciar_Sesion():
     Tipo.pack(pady = 5)
 
     Inicio = tk.Button(ventana, text = "Iniciar Sesión", command = lambda: Verificar(Nom, Con,Tipo))
-    Inicio.pack(side = tk.TOP, pady = 5)
+    Inicio.pack(pady = 5)
     Cancelar = tk.Button(ventana, text = "Cancelar", command = Menu, font=("Myanmar Sans Pro", 10))
     Cancelar.pack(side = tk.TOP, pady = 5)
+
+def Cerrar_Sesion():
+    global nomos
+    Cerrar_Sesion = messagebox.askyesno("Digital Bell", "¿Desea cerrar sesión?")
+    if Cerrar_Sesion:
+        nomos = ""
+        Menu()
+    else:
+        messagebox.showinfo("Digital Bell", "No se pudo cerrar sesión")
+
+def Menu_Habitante():
+    global Usuario,nomos
+
+    for widget in ventana.winfo_children():
+        widget.destroy()
+    
+    Texto = tk.Label(ventana, text = ("Bienvenido ",nomos), font = ("Myanmar Khyay", 15))
+    Texto.pack(side = tk.TOP)
+
+    Sugerencias = tk.Button(ventana, text = "Quejas y Sugerencias", command = Quejas_Habitante)
+    Sugerencias.pack(side = tk.TOP, pady = 10,padx = 10)
+
+    Horarios = tk.Button(ventana, text = "Horarios y rutas del día", command = Horario_Habitante)
+    Horarios.pack(side = tk.TOP, pady = 10,padx = 10)
+
+    Cerrar = tk.Button(ventana, text = "Cerrar Sesión", command = Cerrar_Sesion)
+    Cerrar.pack(side = tk.TOP)
+
+def Quejas_Habitante():
+    global Usuario,nomos
+
+    for widget in ventana.winfo_children:
+        widget.destroy()
+    
+    def Guardar_Queja():
+        global nomos
+        Sug = Sugerencia.get()
+        Usuario = nomos
+        Sugerencia = {
+            "Usuario": Usuario,
+            "Queja": Sug
+        }
+        Queja.append(Sugerencia)
+
+    Texto = tk.Label(ventana, text = ("Quejas y sugerencias"), font = ("Myanmar Khyay", 15))
+    Texto.pack(side = tk.TOP, pady = 10)
+    Sugerencia = tk.Text(ventana, height = 20, width = 50)
+    Sugerencia.pack(side = tk.TOP, pady = 10)
+    Enviar = tk.Button(ventana, text = "Enviar queja", command = lambda: Guardar_Queja(Sugerencia))
+    Enviar.pack(side = tk.TOP, pady = 10)
+
+def Menu_Empleado():
+    global Usuario,nomos
+
+    for widget in ventana.winfo_children():
+        widget.destroy()
+    
+    Texto = tk.Label(ventana, text = ("Bienvenido ",nomos), font = ("Myanmar Khyay", 15))
+    Texto.pack(side = tk.TOP, pady = 10)
+    
+    for Horario['nombre'] in Horario:
+        if Horario['nombre'] == nomos:
+            Texto2 = tk.Label(ventana, text = ("Hora de salida: ",Horario['Salida']), font = ("Myanmar Sans Pro", 10))
+            Texto2.pack(side = tk.TOP)
+            Texto3 = tk.Label(ventana, text = "Horario:", font = ("Myanmar Sans Pro", 10))
+            Texto3.pack(side = tk.TOP)
+            Ruta = tk.Text(ventana, height = 20, width = 40, font = ("Myanmar Sans Pro", 10))
+            Ruta.insert(tk.END, Horario['Ruta'])
+            Ruta.config(state = tk.DISABLED)
+            Ruta.pack(side = tk.TOP, fill = tk.BOTH, expand = True)
+            Barra = tk.Scrollbar(ventana, command = Ruta.yview)
+            Barra.pack(side = tk.RIGHT, fill = tk.Y)
+    
+    Cerrar = tk.Button(ventana, text = "Cerrar Sesión", command = Cerrar_Sesion)
+    Cerrar.pack(pady = 10)
+            
+def Menu_Admin():
+    global Usuario,nomos
+
+    for widget in ventana.winfo_children:
+        widget.destroy()
+    
+    Texto = tk.Label(ventana, text = "Bienvenido Administrador", font = ("Myanmar Khyay", 15))
+    Texto.pack(side = tk.TOP, pady = 10)
+    Horario = tk.Button(ventana, text = "Horarios", command = Ingresar_Horarios, font = ("Myanmar Sans Pro", 10))
+    Horario.pack(side = tk.TOP, pady = 10)
+    Actualizar = tk.Button(ventana, text = "Actualizar ubicación", command = Actualizar_Ubiacion, font = ("Myanmar Sans Pro", 10))
+    Actualizar.pack(side = tk.TOP, pady = 10)
+    Queja = tk.Button(ventana, text = "Quejas y sugerencias", commando = Quejas, font = ("Myanmar Sans Pro", 10))
+    Queja.pack(side = tk.TOP, pady = 10)
+    Cerrar = tk.Button(ventana, text = "Cerrar Sesión", command = Cerrar_Sesion)
+    Cerrar.pack(side = tk.TOP, pady = 10)
+
+def Quejas():
+    global Queja
+
+    for widget in ventana.winfo_children:
+        widget.destroy()
+    
+    Titulo = tk.Label(ventana, text = "Quejas y sugerencias")
+    Titulo.pack(side = tk.TOP)
+    if not Queja:
+        Texto = tk.Label(ventana, text = "No hay quejas por el momento")
+        Texto.pack(side = tk.TOP, pady = 10)
+    else:
+        for Sugerencia in Queja:
+            Nombre = tk.Label(ventana, text = (Sugerencia['Usuario']))
+            Nombre.pack(side = tk.TOP, pady = 10)
+            Problema = tk.Label(ventana, text = (Sugerencia['Queja']))
+            Problema.pack(side = tk.TOP, pady = 10)
+    Regresar = tk.Button(ventana, text = "Volver al menu", command = Menu_Admin)
+    Regresar.pack(side = tk.TOP, pady = 10)
 
 Texto = tk.Label(ventana, text = "Bienvenid@ a Digital Bell", font = ("Myanmar Khyay",20))
 Texto.pack(side = tk.TOP, pady = 10)
@@ -244,5 +351,4 @@ Sesion.pack(side = tk.TOP, pady = 10,padx = 10)
 Salir = tk.Button(ventana, text = "Salir", command = ventana.quit, font = ("Myanmar Sans Pro", 15))
 Salir.pack(pady = 5)
 
-if __name__ == "__main__":
-    ventana.mainloop()
+ventana.mainloop()

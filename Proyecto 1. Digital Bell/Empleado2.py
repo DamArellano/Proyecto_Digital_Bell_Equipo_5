@@ -1,22 +1,21 @@
 import tkinter as tk
 from tkinter import messagebox
 
-def Empleado():
-    ventana = tk.Tk()
-    ventana.title("Digital Bell")
-    ventana.geometry("500x500")
-    from MenuPrincipal import Menu
+Usuario = []
+Queja = []
+Horario = []
+nomos = ""
 
-    def Menu_Empleado():
-        global Usuario,nomos
+def Menu_Empleado():
+    global Usuario,nomos
 
-        for widget in ventana.winfo_children():
+    for widget in ventana.winfo_children():
             widget.destroy()
     
-        Texto = tk.Label(ventana, text = ("Bienvenido ",nomos), font = ("Myanmar Khyay", 15))
-        Texto.pack(side = tk.TOP, pady = 10)
+    Texto = tk.Label(ventana, text = ("Bienvenido ",nomos), font = ("Myanmar Khyay", 15))
+    Texto.pack(side = tk.TOP, pady = 10)
     
-        for Horario['nombre'] in Horario:
+    for Horario['nombre'] in Horario:
             if Horario['nombre'] == nomos:
                 Texto2 = tk.Label(ventana, text = ("Hora de salida: ",Horario['Salida']), font = ("Myanmar Sans Pro", 10))
                 Texto2.pack(side = tk.TOP)
@@ -29,8 +28,8 @@ def Empleado():
                 Barra = tk.Scrollbar(ventana, command = Ruta.yview)
                 Barra.pack(side = tk.RIGHT, fill = tk.Y)
     
-        Cerrar = tk.Button(ventana, text = "Cerrar Sesión", command = Cerrar_Sesion)
-        Cerrar.pack(pady = 10)
+    Cerrar = tk.Button(ventana, text = "Cerrar Sesión", command = Cerrar_Sesion)
+    Cerrar.pack(pady = 10)
 
     def Cerrar_Sesion():
         global nomos
