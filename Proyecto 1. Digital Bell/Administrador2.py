@@ -1,11 +1,5 @@
 import tkinter as tk
 from tkinter import messagebox
-Usuario = []
-Queja = []
-Horario = []
-nomos = ""
-def Menu_Admin():
-    global Usuario,nomos
 
     for widget in ventana.winfo_children:
             widget.destroy()
