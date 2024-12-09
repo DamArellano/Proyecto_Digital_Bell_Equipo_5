@@ -210,6 +210,11 @@ def crear_interfaz(logica_programa):
         for widget in ventana.winfo_children():
             widget.destroy()
         
+        def Guardar_Queja():
+            global nomos
+            logica_programa["Enviar_Queja"](Sugerencia,nomos,Queja)
+            messagebox.showinfo("Quejas y Sugerencias","Queja registrada exitosamente")
+
         Texto = tk.Label(ventana, text = ("Quejas y sugerencias"), font = ("Myanmar Khyay", 15))
         Texto.pack(side = tk.TOP, pady = 10)
         Sugerencia = tk.Text(ventana, height = 20, width = 50)

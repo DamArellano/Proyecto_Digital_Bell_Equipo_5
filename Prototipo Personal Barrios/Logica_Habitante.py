@@ -26,3 +26,11 @@ def Registrar_Habitante(Nom,Dir,Ne,Ni,Num,Col,Al,Cp,Con,Usuario):
 
     Usuario.append(Habitante)
 
+def QuejaHa(Sugerencia,nomos,Queja):
+    Sug = Sugerencia.get()
+    Usuario = nomos
+    Sugerencia = {
+        "Usuario": Usuario,
+        "Queja": Sug
+    }
+    Queja.append(Sugerencia)
