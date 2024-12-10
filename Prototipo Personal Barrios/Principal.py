@@ -16,7 +16,7 @@ def main():
         "Registro_Habitante": Logica_Habitante.Registrar_Habitante,
         "Enviar_Queja": Logica_Habitante.QuejaHa,
         "Ver_Horarios": Logica_Habitante.Mostrar_Horarios,
-        "Mostrar_Horarios": Logica_Habitante.Mostrar_Horarios,
+        "Mostrar_Horarios": Logica_Empleado.Mostrar_Horarios,
         "Registro_Empleado": Logica_Empleado.Registrar_Empleado,
         "Horarios": Logica_Administrador.AsH,
     }
