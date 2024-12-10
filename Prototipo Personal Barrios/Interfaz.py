@@ -63,14 +63,31 @@ def crear_interfaz(logica_programa):
         def Agregar():
             global Usuario,nomos
             if tipo == "Habitante":
-                nomos = Nom.get()
-                logica_programa["Registro_Habitante"](Nom,Dir,Ne,Ni,Num,Col,Al,Cp,Con,Usuario)
-                Menu_Habitante()
+                Nombre = Nom.get()
+                Direccion = Dir.get()
+                Nume = Ne.get()
+                Numero = Num.get()
+                Colonia = Col.get()
+                Alcaldia = Al.get()
+                Copo = Cp.get()
+                Contraseña = Con.get()
+                if not Nombre or not Direccion  or not Nume or not Numero or not Colonia or not Alcaldia or not Copo or not Contraseña:
+                    messagebox.showerror("Error", "Por favor, complete todos los campos")
+                else:
+                    nomos = Nom.get()
+                    logica_programa["Registro_Habitante"](Nom,Dir,Ne,Ni,Num,Col,Al,Cp,Con,Usuario)
+                    Menu_Habitante()
         
             elif tipo == "Empleado":
-                nomos = Num.get()
-                logica_programa["Registro_Empleado"](Nom,Num,Con,Usuario)
-                Menu_Empleado()
+                Nombre = Nom.get()
+                Numero = Num.get()
+                Contraseña = Con.get()
+                if not Nombre or not Numero or not Contraseña:
+                    messagebox.showerror("Error", "Por favor, complete todos los campos")
+                else:
+                    nomos = Num.get()
+                    logica_programa["Registro_Empleado"](Nom,Num,Con,Usuario)
+                    Menu_Empleado()
         
             else:
                 messagebox.showerror("Digital Bell", "Tipo de usuario no reconocido")
@@ -460,13 +477,9 @@ def crear_interfaz(logica_programa):
             widget.destroy()
         
         def Asignar_Horarios():
-            logica_programa["Horarios"](Num.get(), Partida.get(), Calle2.get(), Calle3.get(), Calle4.get(), Horario)
+            logica_programa["Horarios"](Num, Partida, Calle2, Calle3, Calle4, Horario)
             messagebox.showinfo("Digital Bell","Horario ingresado exitosamente")
             Menu_Admin()
-
-        # Destruir todos los widgets existentes en la ventana
-        for widget in ventana.winfo_children():
-            widget.destroy()
 
         # Configurar la ventana para centrar el frame
         ventana.grid_rowconfigure(0, weight=1)  # Espacio dinámico arriba y abajo
@@ -520,15 +533,9 @@ def crear_interfaz(logica_programa):
             widget.destroy()
 
         def Actualizar():
-            empleado_num = Num.get()
-            nueva_ubicacion = Lugar.get("1.0", tk.END).strip()  # Obtener el texto de la caja de texto
-
-            if empleado_num and nueva_ubicacion:
-                logica_programa["Actualizar_Ubicacion"](empleado_num, nueva_ubicacion)
-                messagebox.showinfo("Digital Bell", "Ubicación actualizada exitosamente")
-                Menu_Admin()  # Regresar al menú del administrador
-            else:
-                messagebox.showerror("Error", "Por favor, complete todos los campos.")
+            logica_programa["Ac_Ubicacion"](Num,Ubicacion,Horario)
+            messagebox.showinfo("Digital Bell", "Ubicación actualizada exitosamente")
+            Menu_Admin()  # Regresar al menú del administrador
 
         Texto = tk.Label(ventana, text = "Ingrese el número de empleado")
         Texto.pack(side = tk.TOP, pady = 10)
@@ -536,8 +543,8 @@ def crear_interfaz(logica_programa):
         Num.pack(side = tk.TOP, pady = 10)
         Texto1 = tk.Label(ventana, text = "Ingrese su ubicación actual")
         Texto1.pack(side = tk.TOP, pady = 10)
-        Lugar = tk.Text(ventana, height = 15, width = 30)
-        Lugar.pack(side = tk.TOP, pady = 10)
+        Ubicacion = tk.Label(ventana)
+        Ubicacion.pack(side = tk.TOP, pady = 10)
         Cambia = tk.Button(ventana, text = "Actualizar ubicación", command = Actualizar,bg="green",fg="white")
         Cambia.pack(side = tk.TOP, pady = 10)
         Regresar = tk.Button(ventana, text = "Regresar", command = Menu_Admin,bg="red",fg="white")

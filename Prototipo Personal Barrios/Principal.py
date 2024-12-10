@@ -10,6 +10,7 @@ def main():
         "Enviar_Queja": Logica_Habitante.QuejaHa,
         "Mostrar_Horarios": Logica_Empleado.Mostrar_Horarios,
         "Registro_Empleado": Logica_Empleado.Registrar_Empleado,
+        "Ac_Ubicacion": Logica_Administrador.Ubicacion,
         "Horarios": Logica_Administrador.AsH,
     }
 
