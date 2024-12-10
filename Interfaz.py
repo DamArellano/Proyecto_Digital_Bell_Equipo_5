@@ -1,38 +1,32 @@
 import tkinter as tk
-
-def mostrar_elementos():
-    # Limpiar el contenido previo
-    texto.delete(1.0, tk.END)
-    
-    # Obtener los elementos del arreglo
-    for elemento in arreglo:
-        texto.insert(tk.END, str(elemento) + "\n")
+from tkinter import ttk
 
 # Crear la ventana principal
 ventana = tk.Tk()
-ventana.title("Mostrar Elementos de un Arreglo con Scrollbar")
+ventana.title("Mostrar Lista de Diccionarios")
 
-# Crear un arreglo (lista)
-arreglo = [i for i in range(1, 101)]  # Ejemplo de 100 elementos
+# Crear el Treeview
+tree = ttk.Treeview(ventana, columns=("Nombre", "Edad", "Ciudad"), show='headings')
+tree.heading("Nombre", text="Nombre")
+tree.heading("Edad", text="Edad")
+tree.heading("Ciudad", text="Ciudad")
+tree.column("Nombre", anchor="center")
+tree.column("Edad", anchor="center")
+tree.column("Ciudad", anchor="center")
 
-# Crear un marco para contener el Text y la Scrollbar
-frame = tk.Frame(ventana)
-frame.pack()
+# Agregar el Treeview a la ventana
+tree.pack(pady=20)
 
-# Crear un widget Text para mostrar los elementos
-texto = tk.Text(frame, height=10, width=30)
-texto.pack(side=tk.LEFT)
+# Ejemplo de lista de diccionarios
+lista_diccionarios = [
+    {"Nombre": "Juan", "Edad": 30, "Ciudad": "Madrid"},
+    {"Nombre": "Ana", "Edad": 25, "Ciudad": "Barcelona"},
+    {"Nombre": "Luis", "Edad": 28, "Ciudad": "Valencia"}
+]
 
-# Crear una scrollbar
-scrollbar = tk.Scrollbar(frame, command=texto.yview)
-scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
+# Insertar datos en el Treeview
+for diccionario in lista_diccionarios:
+    tree.insert("", tk.END, values=(diccionario["Nombre"], diccionario["Edad"], diccionario["Ciudad"]))
 
-# Configurar el Text para usar la scrollbar
-texto.config(yscrollcommand=scrollbar.set)
-
-# Crear un botón para mostrar los elementos
-boton = tk.Button(ventana, text="Mostrar Elementos", command=mostrar_elementos)
-boton.pack()
-
-# Iniciar el bucle principal de la interfaz
+# Ejecutar el bucle principal
 ventana.mainloop()

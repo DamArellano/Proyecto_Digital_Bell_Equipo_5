@@ -1,5 +1,5 @@
 import tkinter as tk
-from tkinter import messagebox
+from tkinter import messagebox,ttk
 Usuario = []
 Queja = []
 Horario = []
@@ -246,12 +246,15 @@ def crear_interfaz(logica_programa):
             Texto.pack(side = tk.TOP,pady = 10)
         else:
             for Ruta in Horario:
-                Horarios.insert(str(Ruta) + "\n")
-                Horarios = tk.Text(ventana, height=30, width=40)
-                Horarios.pack(side = tk.TOP, pady = 10)
-                scrollbar = tk.Scrollbar(ventana, command=Horarios.yview)
-                scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
-                Horarios.config(yscrollcommand=scrollbar.set)
+                Empleado = tk.Label(ventana, text = ("Empleado asignado: ",Ruta['Empleado']))
+                Empleado.pack(side = tk.TOP, pady = 5)
+                Tabla.heading("Comienzo", text="Ubicación")
+                Tabla.heading("Dir1", text="Dirección 1")
+                Tabla.heading("Dir2", text="Dirección 2")
+                Tabla.heading("Dir3", text="Dirección 3")
+                for Ruta['Empleado'] in  Horario:
+                    Tabla.insert("", tk.END, values=(Ruta["Nombre"], Ruta["Direccion1"], Ruta["Direccion2"],Ruta['Direccion3']))
+                    Tabla = ttk.Treeview(ventana, columns=("Comienzo", "Dir2", "Dir3","Dir4"), show='headings')
     
     #A partir de aquí comienza la sección de empleados
     #Como se puede ver, el empleado solo tendrá una función ya que solo tiene que ver el horario asignado
@@ -269,13 +272,20 @@ def crear_interfaz(logica_programa):
             Texto = tk.Label(ventana, text = "No tiene un horario asignado de momento")
             Texto.pack(side = tk.TOP, pady = 10)
         else:
-            for Ruta in Horario:
-                Horarios.insert(str(Ruta) + "\n")
-                Horarios = tk.Text(ventana, height=30, width=40)
-                Horarios.pack(side = tk.TOP, pady = 10)
-                scrollbar = tk.Scrollbar(ventana, command=Horarios.yview)
-                scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
-                Horarios.config(yscrollcommand=scrollbar.set)
+            if not Horario:
+                Texto = tk.Label(ventana, text = "No hay horarios disponibles de momento", font = ("Myanmar Sans Pro",10))
+                Texto.pack(side = tk.TOP,pady = 10)
+            else:
+                for Ruta in Horario:
+                    Empleado = tk.Label(ventana, text = ("Empleado asignado: ",Ruta['Empleado']))
+                    Empleado.pack(side = tk.TOP, pady = 5)
+                    Tabla = ttk.Treeview(ventana, columns=("Comienzo", "Dir2", "Dir3","Dir4"), show='headings')
+                    Tabla.heading("Comienzo", text="Ubicación")
+                    Tabla.heading("Dir1", text="Dirección 1")
+                    Tabla.heading("Dir2", text="Dirección 2")
+                    Tabla.heading("Dir3", text="Dirección 3")
+                    for Ruta['Empleado'] in  Horario:
+                        Tabla.insert("", tk.END, values=(Ruta["Nombre"], Ruta["Direccion1"], Ruta["Direccion2"],Ruta['Direccion3']))
 
     #El apartado del Administrador, de los más dificiles y importantes del programa
     #Aquí depende gran parte del programa que son los horarios
@@ -301,7 +311,9 @@ def crear_interfaz(logica_programa):
             widget.destroy()
         
         def Asignar_Horarios():
-            logica_programa["Horarios"](Num,Partida,Calle2,Calle3,Calle4,Horario)
+            logica_programa["Horarios"](Num.get(), Partida.get(), Calle2.get(), Calle3.get(), Calle4.get(), Horario)
+            messagebox.showinfo("Digital Bell","Horario ingresado exitosamente")
+            Menu_Admin()
 
         #Los horarios de este programa estarán compuestos por tres calles
         Texto = tk.Label(ventana, text = "Horarios y rutas")
@@ -336,9 +348,17 @@ def crear_interfaz(logica_programa):
         
         for widget in ventana.winfo_children():
             widget.destroy()
-        
+
         def Actualizar():
-            logica_programa["Actualizar_Ubicacion"](Num,Cambia)
+            empleado_num = Num.get()
+            nueva_ubicacion = Lugar.get("1.0", tk.END).strip()  # Obtener el texto de la caja de texto
+
+            if empleado_num and nueva_ubicacion:
+                logica_programa["Actualizar_Ubicacion"](empleado_num, nueva_ubicacion)
+                messagebox.showinfo("Digital Bell", "Ubicación actualizada exitosamente")
+                Menu_Admin()  # Regresar al menú del administrador
+            else:
+                messagebox.showerror("Error", "Por favor, complete todos los campos.")
 
         Texto = tk.Label(ventana, text = "Ingrese el número de empleado")
         Texto.pack(side = tk.TOP, pady = 10)
@@ -365,16 +385,15 @@ def crear_interfaz(logica_programa):
         Regresar = tk.Button(ventana, text = "Volver al menu", command = Menu_Admin)
         Regresar.pack(side = tk.TOP, pady = 10)
         if not Queja:
-            Texto = tk.Label(ventana, text = "No hay quejas ni sugerencias de momento")
-            Texto.pack(side = tk.TOP, pady = 10)
+            Texto = tk.Label(ventana, text = "No hay quejas de momento", font = ("Myanmar Sans Pro",10))
+            Texto.pack(side = tk.TOP,pady = 10)
         else:
             for quejas in Queja:
-                Sug.insert(str(quejas) + "\n")
-                Sug = tk.Text(ventana, height=30, width=30)
-                Sug.pack(side = tk.TOP, pady = 10)
-                scrollbar = tk.Scrollbar(ventana, command=Sug.yview)
-                scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
-                Sug.config(yscrollcommand=scrollbar.set)
+                Usuario = tk.Label(ventana, text = quejas['Usuario'])
+                Usuario.pack(side = tk.TOP, pady = 10)
+                Sugerencia = tk.Label(ventana, text = quejas['Queja'])
+                Sugerencia.pack(side = tk.TOP, pady = 10)
+
 
     #Esta función es exclusivamente para cerrar sesión y volver al menu principal
     def Cerrar_Sesion():
