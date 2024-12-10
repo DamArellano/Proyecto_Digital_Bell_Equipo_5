@@ -11,6 +11,7 @@ def main():
         "Mostrar_Horarios": Logica_Empleado.Mostrar_Horarios,
         "Registro_Empleado": Logica_Empleado.Registrar_Empleado,
         "Horarios": Logica_Administrador.AsH,
+        "Ac_Ubicacion": Logica_Administrador.Ubicacion
     }
 
     Interfaz.crear_interfaz(logica_programa)

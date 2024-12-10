@@ -14,8 +14,7 @@ def AsH(Num,Partida,Calle2,Calle3,Calle4,Horario):
 
     Horario.append(Ruta)
 
-def Ubicacion(Ruta,Num,Ubicacion,Horario):
-    Ruta = Ruta.get()
+def Ubicacion(Num,Ubicacion,Horario):
     Numero = Num.get()
     Ubicacion = Ubicacion.get()
     for Ruta in Horario:

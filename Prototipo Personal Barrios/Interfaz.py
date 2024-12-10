@@ -49,7 +49,7 @@ def crear_interfaz(logica_programa):
                 Menu_Habitante()
         
             elif tipo == "Empleado":
-                nomos = Num.get()
+                nomos = Con.get()
                 logica_programa["Registro_Empleado"](Nom,Num,Con,Usuario)
                 Menu_Empleado()
         
@@ -163,7 +163,7 @@ def crear_interfaz(logica_programa):
                 else:
                     for Empleado in Usuario:
                         if Empleado['Nombre'] == Nombre and Empleado['Contraseña'] == Contrasena:
-                            nomos = Nombre
+                            nomos = Contrasena
                             messagebox.showinfo("Digital Bell", "Bienvenido " + Nombre)
                             Menu_Empleado()
                             return
@@ -246,15 +246,16 @@ def crear_interfaz(logica_programa):
             Texto.pack(side = tk.TOP,pady = 10)
         else:
             for Ruta in Horario:
-                Empleado = tk.Label(ventana, text = ("Empleado asignado: ",Ruta['Empleado']))
-                Empleado.pack(side = tk.TOP, pady = 5)
-                Tabla.heading("Comienzo", text="Ubicación")
-                Tabla.heading("Dir1", text="Dirección 1")
-                Tabla.heading("Dir2", text="Dirección 2")
-                Tabla.heading("Dir3", text="Dirección 3")
-                for Ruta['Empleado'] in  Horario:
-                    Tabla.insert("", tk.END, values=(Ruta["Nombre"], Ruta["Direccion1"], Ruta["Direccion2"],Ruta['Direccion3']))
-                    Tabla = ttk.Treeview(ventana, columns=("Comienzo", "Dir2", "Dir3","Dir4"), show='headings')
+                Empleado = tk.Label(ventana, text = (Ruta['Empleado']))
+                Empleado.pack(side = tk.TOP, pady = 10)
+                Ubicacion = tk.Label(ventana, text = (Ruta['Ubicacion']))
+                Ubicacion.pack(side = tk.TOP, pady = 10)
+                Dir1 = tk.Label(ventana, text = (Ruta['Direccion1']))
+                Dir1.pack(side = tk.TOP, pady = 10)
+                Dir2 = tk.Label(ventana, text = (Ruta['Direccion2']))
+                Dir2.pack(side = tk.TOP, pady = 10)
+                Dir3 = tk.Label(ventana, text = (Ruta['Direccion3']))
+                Dir3.pack(side = tk.TOP, pady = 10)
     
     #A partir de aquí comienza la sección de empleados
     #Como se puede ver, el empleado solo tendrá una función ya que solo tiene que ver el horario asignado
@@ -272,20 +273,18 @@ def crear_interfaz(logica_programa):
             Texto = tk.Label(ventana, text = "No tiene un horario asignado de momento")
             Texto.pack(side = tk.TOP, pady = 10)
         else:
-            if not Horario:
-                Texto = tk.Label(ventana, text = "No hay horarios disponibles de momento", font = ("Myanmar Sans Pro",10))
-                Texto.pack(side = tk.TOP,pady = 10)
-            else:
-                for Ruta in Horario:
-                    Empleado = tk.Label(ventana, text = ("Empleado asignado: ",Ruta['Empleado']))
-                    Empleado.pack(side = tk.TOP, pady = 5)
-                    Tabla = ttk.Treeview(ventana, columns=("Comienzo", "Dir2", "Dir3","Dir4"), show='headings')
-                    Tabla.heading("Comienzo", text="Ubicación")
-                    Tabla.heading("Dir1", text="Dirección 1")
-                    Tabla.heading("Dir2", text="Dirección 2")
-                    Tabla.heading("Dir3", text="Dirección 3")
-                    for Ruta['Empleado'] in  Horario:
-                        Tabla.insert("", tk.END, values=(Ruta["Nombre"], Ruta["Direccion1"], Ruta["Direccion2"],Ruta['Direccion3']))
+            for Ruta in Horario:
+                if Ruta['Empleado'] == nomos:
+                    Emp = tk.Label(ventana, text = (Ruta['Empleado']))
+                    Emp.pack(side = tk.TOP, pady = 10)
+                    Ubicacion = tk.Label(ventana, text = (Ruta['Ubicacion']))
+                    Ubicacion.pack(side = tk.TOP, pady = 10)
+                    Dir1 = tk.Label(ventana, text = (Ruta['Direccion1']))
+                    Dir1.pack(side = tk.TOP, pady = 10)
+                    Dir2= tk.Label(ventana, text = (Ruta['Direccion2']))
+                    Dir2.pack(side = tk.TOP, pady = 10)
+                    Dir3 = tk.Label(ventana, text = (Ruta['Direccion3']))
+                    Dir3.pack(side = tk.TOP, pady = 10)
 
     #El apartado del Administrador, de los más dificiles y importantes del programa
     #Aquí depende gran parte del programa que son los horarios
@@ -311,11 +310,11 @@ def crear_interfaz(logica_programa):
             widget.destroy()
         
         def Asignar_Horarios():
-            logica_programa["Horarios"](Num.get(), Partida.get(), Calle2.get(), Calle3.get(), Calle4.get(), Horario)
+            logica_programa["Horarios"](Num, Partida, Calle2, Calle3, Calle4, Horario)
             messagebox.showinfo("Digital Bell","Horario ingresado exitosamente")
             Menu_Admin()
 
-        #Los horarios de este programa estarán compuestos por tres calles
+        #Los horarios de este programa estarán compuestos por tres calles sin contar el comienzo
         Texto = tk.Label(ventana, text = "Horarios y rutas")
         Texto.pack(side = tk.TOP, pady = 5)
         Texto1 = tk.Label(ventana, text = "Número de Empleado a asignar")
@@ -350,15 +349,9 @@ def crear_interfaz(logica_programa):
             widget.destroy()
 
         def Actualizar():
-            empleado_num = Num.get()
-            nueva_ubicacion = Lugar.get("1.0", tk.END).strip()  # Obtener el texto de la caja de texto
-
-            if empleado_num and nueva_ubicacion:
-                logica_programa["Actualizar_Ubicacion"](empleado_num, nueva_ubicacion)
-                messagebox.showinfo("Digital Bell", "Ubicación actualizada exitosamente")
-                Menu_Admin()  # Regresar al menú del administrador
-            else:
-                messagebox.showerror("Error", "Por favor, complete todos los campos.")
+            logica_programa["Ac_Ubicacion"](Num, Ubicacion,Horario)
+            messagebox.showinfo("Digital Bell", "Ubicación actualizada exitosamente")
+            Menu_Admin()
 
         Texto = tk.Label(ventana, text = "Ingrese el número de empleado")
         Texto.pack(side = tk.TOP, pady = 10)
@@ -366,8 +359,8 @@ def crear_interfaz(logica_programa):
         Num.pack(side = tk.TOP, pady = 10)
         Texto1 = tk.Label(ventana, text = "Ingrese su ubicación actual")
         Texto1.pack(side = tk.TOP, pady = 10)
-        Lugar = tk.Text(ventana, height = 15, width = 30)
-        Lugar.pack(side = tk.TOP, pady = 10)
+        Ubicacion = tk.Entry(ventana)
+        Ubicacion.pack(side = tk.TOP, pady = 10)
         Cambia = tk.Button(ventana, text = "Actualizar ubicación", command = Actualizar)
         Cambia.pack(side = tk.TOP, pady = 10)
         Regresar = tk.Button(ventana, text = "Regresar", command = Menu_Admin)
