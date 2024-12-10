@@ -1,16 +1,9 @@
-import Interfaz
 import Logica_Empleado
 import Logica_Habitante
 import Logica_Administrador
-
-Usuario = []
-Queja = []
-Horario = []
-nomos = ""
+import Interfaz
 
 def main():
-    global nomos, Usuario, Queja, nomos
-
     #Diccionario con la la logica del programa
     logica_programa = {
         "Registro_Habitante": Logica_Habitante.Registrar_Habitante,

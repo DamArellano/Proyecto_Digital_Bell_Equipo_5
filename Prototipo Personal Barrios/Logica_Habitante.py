@@ -36,5 +36,8 @@ def QuejaHa(Sugerencia,nomos,Queja):
     Queja.append(Sugerencia)
 
 def Mostrar_Horarios(Horario,Horarios):
-    for Ruta in Horario:
-        Horarios.insert(str(Ruta) + "\n")
+    if not Horario:
+        Horarios.insert("No hay horarios al momento")
+    else:
+        for Ruta in Horario:
+            Horarios.insert(str(Ruta) + "\n")
