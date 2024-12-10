@@ -1,32 +1,32 @@
 import tkinter as tk
-from tkinter import ttk
+from tkinter import messagebox
+
+def verificar_campos():
+    # Obtener el contenido de los campos de texto
+    campo1 = entry1.get()
+    campo2 = entry2.get()
+    
+    # Verificar si alguno de los campos está vacío
+    if not campo1 or not campo2:
+        messagebox.showwarning("Advertencia", "Por favor, completa todos los campos.")
+    else:
+        messagebox.showinfo("Éxito", "Todos los campos están llenos. Procediendo...")
+        # Aquí puedes agregar la lógica para proceder
 
 # Crear la ventana principal
-ventana = tk.Tk()
-ventana.title("Mostrar Lista de Diccionarios")
+root = tk.Tk()
+root.title("Verificación de Campos")
 
-# Crear el Treeview
-tree = ttk.Treeview(ventana, columns=("Nombre", "Edad", "Ciudad"), show='headings')
-tree.heading("Nombre", text="Nombre")
-tree.heading("Edad", text="Edad")
-tree.heading("Ciudad", text="Ciudad")
-tree.column("Nombre", anchor="center")
-tree.column("Edad", anchor="center")
-tree.column("Ciudad", anchor="center")
+# Crear campos de texto
+entry1 = tk.Entry(root)
+entry1.pack(pady=10)
 
-# Agregar el Treeview a la ventana
-tree.pack(pady=20)
+entry2 = tk.Entry(root)
+entry2.pack(pady=10)
 
-# Ejemplo de lista de diccionarios
-lista_diccionarios = [
-    {"Nombre": "Juan", "Edad": 30, "Ciudad": "Madrid"},
-    {"Nombre": "Ana", "Edad": 25, "Ciudad": "Barcelona"},
-    {"Nombre": "Luis", "Edad": 28, "Ciudad": "Valencia"}
-]
+# Crear un botón para verificar los campos
+boton_verificar = tk.Button(root, text="Verificar Campos", command=verificar_campos)
+boton_verificar.pack(pady=20)
 
-# Insertar datos en el Treeview
-for diccionario in lista_diccionarios:
-    tree.insert("", tk.END, values=(diccionario["Nombre"], diccionario["Edad"], diccionario["Ciudad"]))
-
-# Ejecutar el bucle principal
-ventana.mainloop()
+# Iniciar el bucle principal
+root.mainloop()
