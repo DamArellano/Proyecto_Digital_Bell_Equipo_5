@@ -13,3 +13,12 @@ def AsH(Num,Partida,Calle2,Calle3,Calle4,Horario):
     }
 
     Horario.append(Ruta)
+
+def Ubicacion(Ruta,Num,Ubicacion,Horario):
+    Ruta = Ruta.get
+    Numero = Num.get
+    Ubicacion = Ubicacion.get
+    for Ruta in Horario:
+        if Ruta["Empleado"] == Numero:
+            Ruta["Ubicacion"] = Ubicacion
+    return

@@ -235,12 +235,12 @@ def crear_interfaz(logica_programa):
         Regresar = tk.Button(ventana, text = "Volver al menu", command = Menu_Habitante, font=("Myanmar Sans Pro", 10))
         Regresar.pack(side = tk.TOP, pady = 10)
 
-        for Ruta in Horario:
-            Ubicación = tk.Label(ventana, text = ("Ubicación actual:",Ruta))
-            Ubicación.pack(side = tk.TOP, pady = 10)
-            
-
-        logica_programa["Mostrar_Horarios"]
+        Horarios = logica_programa["Ver_Horarios"]
+        Horarios = tk.Text(ventana, height=30, width=40)
+        Horarios.pack(side = tk.TOP, pady = 10)
+        scrollbar = tk.Scrollbar(ventana, command=Horarios.yview)
+        scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
+        Horarios.config(yscrollcommand=scrollbar.set)
     
     #A partir de aquí comienza la sección de empleados
     #Como se puede ver, el empleado solo tendrá una función ya que solo tiene que ver el horario asignado
@@ -253,6 +253,13 @@ def crear_interfaz(logica_programa):
 
         Cerrar = tk.Button(ventana, text = "Cerrar Sesión", command = Cerrar_Sesion)
         Cerrar.pack(pady = 10)
+
+        Horarios = logica_programa["Mostrar_Horarios"]
+        Horarios = tk.Text(ventana, height=30, width=40)
+        Horarios.pack(side = tk.TOP, pady = 10)
+        scrollbar = tk.Scrollbar(ventana, command=Horarios.yview)
+        scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
+        Horarios.config(yscrollcommand=scrollbar.set)
 
     #El apartado del Administrador, de los más dificiles y importantes del programa
     #Aquí depende gran parte del programa que son los horarios
@@ -312,6 +319,9 @@ def crear_interfaz(logica_programa):
         for widget in ventana.winfo_children:
             widget.destroy()
         
+        def Actualizar(Num,Ubicacion):
+            logica_programa["Actualizar_Ubicacion"](Num,Ubicacion)
+
         Texto = tk.Label(ventana, text = "Ingrese el número de empleado")
         Texto.pack(side = tk.TOP, pady = 10)
         Num = tk.Entry(ventana)

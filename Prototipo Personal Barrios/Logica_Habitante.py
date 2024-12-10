@@ -34,3 +34,7 @@ def QuejaHa(Sugerencia,nomos,Queja):
         "Queja": Sug
     }
     Queja.append(Sugerencia)
+
+def Mostrar_Horarios(Horario,Horarios):
+    for Ruta in Horario:
+        Horarios.insert(str(Ruta) + "\n")
