@@ -10,3 +10,8 @@ def Registrar_Empleado(Nom,Num,Con,Usuario):
     }
 
     Usuario.append(Empleado)
+
+def Mostrar_Horarios(Horario,Horarios,nomos):
+    for Ruta in Horario:
+        if Ruta["Nombre"] == nomos:
+            Horarios.insert(str(Ruta) + "\n")
