@@ -26,18 +26,12 @@ def Registrar_Habitante(Nom,Dir,Ne,Ni,Num,Col,Al,Cp,Con,Usuario):
 
     Usuario.append(Habitante)
 
-def QuejaHa(Sugerencia,nomos,Queja):
-    Sug = Sugerencia.get()
-    Usuario = nomos
-    Sugerencia = {
-        "Usuario": Usuario,
-        "Queja": Sug
-    }
-    Queja.append(Sugerencia)
-
-def Mostrar_Horarios(Horario,Horarios):
-    if not Horario:
-        Horarios.insert("No hay horarios al momento")
+def QuejaHa(Sug, nomos, Queja):
+    if Sug:
+        quejas = {
+            "Usuario": nomos,
+            "Queja": Sug
+        }
+        Queja.append(quejas)
     else:
-        for Ruta in Horario:
-            Horarios.insert(str(Ruta) + "\n")
+        return "La queja no puede estar vacía."
