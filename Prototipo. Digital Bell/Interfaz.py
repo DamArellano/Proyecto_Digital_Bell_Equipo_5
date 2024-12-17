@@ -1,414 +1,3 @@
-<<<<<<< HEAD
-import tkinter as tk
-from tkinter import messagebox,ttk
-Usuario = []
-Queja = []
-Horario = []
-nomos = ""
-
-def crear_interfaz(logica_programa):
-    # Creamos la ventana principal
-    ventana = tk.Tk()
-    ventana.title("Digital Bell")
-    ventana.geometry("500x500")
-
-    #La primer función de todas
-    def Menu():
-        for widget in ventana.winfo_children():
-            widget.destroy()
-    
-        Texto = tk.Label(ventana, text = "Bienvenid@ a Digital Bell", font = ("Myanmar Khyay",20))
-        Texto.pack(side = tk.TOP, pady = 10)
-        Registra = tk.Button(ventana, text = "Crear cuenta", command = Registro, font = ("Myanmar Sans Pro", 15))
-        Registra.pack(side = tk.TOP, pady = 10,padx = 10)
-        Sesion = tk.Button(ventana, text = "Iniciar Sesión", command = Iniciar_Sesion, font = ("Myanmar Sans Pro", 15))
-        Sesion.pack(side = tk.TOP, pady = 10,padx = 10)
-        Salir = tk.Button(ventana, text = "Salir", command = ventana.quit, font = ("Myanmar Sans Pro", 15))
-        Salir.pack(pady = 5)
-    
-    def Registro():
-
-        for widget in ventana.winfo_children():
-            widget.destroy()
-        
-        Texto = tk.Label(ventana, text = "Elija el tipo de usuario a registrar", font = ("Myanmar Khyay",20))
-        Texto.pack(pady = 10)
-        Habitante = tk.Button(ventana, text = "Habitante", command = lambda: Registrar_Usuario(tipo = "Habitante"), font = ("Myanmar Sans Pro",15))
-        Habitante.pack(side = tk.LEFT, padx = 30)
-        Empleado = tk.Button(ventana, text = "Empleado", command = lambda: Registrar_Usuario(tipo = "Empleado"), font = ("Myanmar Sans Pro",15))
-        Empleado.pack(side = tk.RIGHT, padx = 30)
-    
-    def Registrar_Usuario(tipo):
-        for widget in ventana.winfo_children():
-            widget.destroy()
-        
-        def Agregar():
-            global Usuario,nomos
-            if tipo == "Habitante":
-                nomos = Nom.get()
-                logica_programa["Registro_Habitante"](Nom,Dir,Ne,Ni,Num,Col,Al,Cp,Con,Usuario)
-                Menu_Habitante()
-        
-            elif tipo == "Empleado":
-                nomos = Con.get()
-                logica_programa["Registro_Empleado"](Nom,Num,Con,Usuario)
-                Menu_Empleado()
-        
-            else:
-                messagebox.showerror("Digital Bell", "Tipo de usuario no reconocido")
-
-        if tipo == "Habitante":
-            Texto = tk.Label(ventana, text = "Ingrese sus datos", font=("Myanmar Khyay", 15))
-            Texto.grid(row = 0, column = 0, padx = 10, pady = 10)
-
-            Texto1 = tk.Label(ventana, text = "Nombre Completo:", font=("Myanmar Sans Pro", 10))
-            Texto1.grid(row = 1, column = 0, padx = 10, pady = 10)
-            Nom = tk.Entry(ventana, width = 30)
-            Nom.grid(row = 1, column = 1, padx = 10, pady = 10, sticky = "w")
-
-            Texto2 = tk.Label(ventana, text = "Calle:", font=("Myanmar Sans Pro", 10))
-            Texto2.grid(row = 2, column = 0, padx = 10, pady = 10)
-            Dir = tk.Entry(ventana, width = 30)
-            Dir.grid(row = 2, column= 1 ,padx = 10, pady = 10, sticky = "w")
-
-            Texto3 = tk.Label(ventana, text = "N° Exterior:", font=("Myanmar Sans Pro", 10))
-            Texto3.grid(row = 3, column = 0, padx = 5, pady = 5)
-            Ne = tk.Entry(ventana)
-            Ne.grid(row = 3, column = 1, padx = 5, pady = 5, sticky = "w")
-
-            Texto4 = tk.Label(ventana, text = "N° Interior:", font=("Myanmar Sans Pro", 10))
-            Texto4.grid(row = 4, column = 0, padx = 5, pady = 5)
-            Ni = tk.Entry(ventana)
-            Ni.grid(row = 4, column = 1, padx = 5, pady = 5, sticky = "w")
-
-            Texto5 = tk.Label(ventana, text = "Colonia:", font=("Myanmar Sans Pro", 10))
-            Texto5.grid(row = 5, column = 0, padx = 10, pady = 10)
-            Col = tk.Entry(ventana, width = 30)
-            Col.grid(row = 5, column = 1, padx = 10, pady = 10, sticky = "w")
-
-            Texto6 = tk.Label(ventana, text = "Alcaldia:", font=("Myanmar Sans Pro", 10))
-            Texto6.grid(row = 6, column = 0, padx = 10, pady = 10)
-            Al = tk.Entry(ventana, width = 30)
-            Al.grid(row = 6, column = 1, padx = 10, pady = 10, sticky = "w")
-
-            Texto7 = tk.Label(ventana, text = "Código Postal:", font=("Myanmar Sans Pro", 10))
-            Texto7.grid(row = 7, column = 0, padx = 10, pady = 10)
-            Cp = tk.Entry(ventana, width = 30)
-            Cp.grid(row = 7, column = 1, padx = 10, pady = 10, sticky = "w")
-
-            Texto8 = tk.Label(ventana, text = "Telefono:", font=("Myanmar Sans Pro", 10))
-            Texto8.grid(row = 8, column = 0, padx = 10, pady = 10)
-            Num = tk.Entry(ventana, width = 30)
-            Num.grid(row = 8, column = 1, padx = 10, pady = 10, sticky = "w")
-
-            Texto9 = tk.Label(ventana, text = "Contraseña:", font=("Myanmar Sans Pro",10))
-            Texto9.grid(row = 9, column = 0, padx = 10, pady = 10)
-            Con = tk.Entry(ventana, width = 30, show = "*")
-            Con.grid(row = 9, column = 1, padx = 10, pady = 10, sticky = "w")
-
-            Registrar = tk.Button(ventana,text = "Ingresar", command = Agregar, font=("Myanmar Sans Pro", 10))
-            Registrar.grid(row = 10, column = 0, padx = 10, pady = 10)
-
-            Cancelar = tk.Button(ventana, text = "Cancelar", command = Menu, font=("Myanmar Sans Pro", 10))
-            Cancelar.grid(row = 10, column = 1, padx = 10, pady = 10)
-    
-        elif tipo == "Empleado":
-            Texto = tk.Label(ventana, text = "Registro", font=("Myanmar Khyay", 20))
-            Texto.grid(row = 0, column = 0, padx = 10, pady = 10)
-
-            Texto1 = tk.Label(ventana, text = "Nombre:", font=("Myanmar Sans Pro",15))
-            Texto1.grid(row = 1, column = 0, padx = 10, pady = 10)
-            Nom = tk.Entry(ventana, width = 30)
-            Nom.grid(row = 1, column = 1, padx = 10, pady = 10, sticky = "w")
-
-            Texto2 = tk.Label(ventana, text = "Telefono:", font=("Myanmar Sans Pro", 15))
-            Texto2.grid(row = 2, column = 0, padx = 10, pady = 10)
-            Num = tk.Entry(ventana, width = 30)
-            Num.grid(row = 2, column = 1, padx = 10, pady = 10, sticky = "w")
-
-            Texto3 = tk.Label(ventana, text = "Número de empleado", font=("Myanmar Sans Pro", 15))
-            Texto3.grid(row = 3, column = 0, padx = 10, pady = 10)
-            Con = tk.Entry(ventana, width = 30)
-            Con.grid(row = 3, column = 1, padx = 10, pady = 10, sticky = "w")
-
-            Registrar = tk.Button(ventana,text = "Ingresar", command = Agregar, font=("Myanmar Sans Pro", 15))
-            Registrar.grid(row = 4, column = 0, padx = 10, pady = 10)
-
-            Cancelar = tk.Button(ventana, text = "Cancelar", command = Menu, font=("Myanmar Sans Pro", 15))
-            Cancelar.grid(row = 4, column = 1, padx = 10, pady = 10)
-    
-    def Iniciar_Sesion():
-        for widget in ventana.winfo_children():
-            widget.destroy()
-        
-        def Verificar(Nom, Con, Tip):
-            global Usuario, nomos
-            Tipo_Usuario = Tip.get()
-            Nombre = Nom.get()
-            Contrasena = Con.get()
-
-            if Tipo_Usuario == "Habitante":
-                for Habitante in Usuario:
-                    if Habitante['Nombre'] == Nombre and Habitante['Contraseña'] == Contrasena:
-                        nomos = Nombre
-                        messagebox.showinfo("Digital Bell", "Bienvenido " + Nombre)
-                        Menu_Habitante()
-                        return
-            
-
-            elif Tipo_Usuario == "Empleado":
-                if Nombre == "Arellano" and Contrasena == "1234":
-                    nomos = Nombre
-                    messagebox.showinfo("Digital Bell", "Bienvenido administrador")
-                    Menu_Admin()
-                else:
-                    for Empleado in Usuario:
-                        if Empleado['Nombre'] == Nombre and Empleado['Contraseña'] == Contrasena:
-                            nomos = Contrasena
-                            messagebox.showinfo("Digital Bell", "Bienvenido " + Nombre)
-                            Menu_Empleado()
-                            return
-
-        Texto1 = tk.Label(ventana,text = "Ingrese su nombre de usuario", font=("Myanmar Sans Pro", 10))
-        Texto1.pack(pady = 5)
-        Nom = tk.Entry(ventana)
-        Nom.pack(pady = 5)
-
-        Texto2 = tk.Label(ventana, text = "Ingrese su contraseña", font=("Myanmar Sans Pro", 10))
-        Texto2.pack(pady= 5)
-        Con = tk.Entry(ventana, show = "*")
-        Con.pack(pady = 5)
-
-        Texto3 = tk.Label(ventana, text = "Indique su tipo de usuario", font=("Myanmar Sans Pro", 10))
-        Texto3.pack(pady = 5)
-        Tip = tk.StringVar(ventana)
-        Tip.set("Usuario")
-        Op = ["Empleado","Habitante"]
-        Tipo = tk.OptionMenu(ventana, Tip, *Op)
-        Tipo.pack(pady = 5)
-
-        Inicio = tk.Button(ventana, text = "Iniciar Sesión", command = lambda: Verificar(Nom,Con,Tip))
-        Inicio.pack(side = tk.TOP, pady = 5)
-        Cancelar = tk.Button(ventana, text = "Cancelar", command = Menu, font=("Myanmar Sans Pro", 10))
-        Cancelar.pack(side = tk.TOP, pady = 5)
-    
-    #Aquí se encuentra la parte más "facil" del programa
-    #El apartado de los Habitantes comienza aquí
-    def Menu_Habitante():
-
-        for widget in ventana.winfo_children():
-            widget.destroy()
-    
-        Texto = tk.Label(ventana, text = ("Bienvenido usuario"), font = ("Myanmar Khyay", 15))
-        Texto.pack(side = tk.TOP)
-
-        Sugerencias = tk.Button(ventana, text = "Quejas y Sugerencias", command = Quejas_Habitante, font = ("Myanmar Sans Pro", 10))
-        Sugerencias.pack(side = tk.TOP, pady = 10,padx = 10)
-
-        Horarios = tk.Button(ventana, text = "Horarios y rutas del día", command = Horario_Habitante)
-        Horarios.pack(side = tk.TOP, pady = 10,padx = 10)
-
-        Cerrar = tk.Button(ventana, text = "Cerrar Sesión", command = Cerrar_Sesion)
-        Cerrar.pack(side = tk.TOP)
-    
-    #Para que los Habitantes de la colonia reporten alguna queja con el servicio o quieran enviar alguna sugerencia
-    def Quejas_Habitante():
-        for widget in ventana.winfo_children():
-            widget.destroy()
-        
-        def Guardar_Queja():
-            global nomos
-            Sug = Sugerencia.get("1.0", tk.END).strip()
-            logica_programa["Enviar_Queja"](Sug,nomos,Queja)
-            messagebox.showinfo("Quejas y Sugerencias","Queja registrada exitosamente")
-            Menu_Habitante()
-
-        Texto = tk.Label(ventana, text = ("Quejas y sugerencias"), font = ("Myanmar Khyay", 15))
-        Texto.pack(side = tk.TOP, pady = 10)
-        Sugerencia = tk.Text(ventana, height = 20, width = 50)
-        Sugerencia.pack(side = tk.TOP, pady = 10)
-        Enviar = tk.Button(ventana, text = "Enviar queja", command = Guardar_Queja)
-        Enviar.pack(side = tk.TOP, pady = 10)
-        Regresar = tk.Button(ventana, text = "Volver al menu", command = Menu_Habitante)
-        Regresar.pack(side = tk.TOP, pady = 10)
-    
-    def Horario_Habitante():
-
-        for widget in ventana.winfo_children():
-            widget.destroy()
-
-        Titulo = tk.Label(ventana, text = "Horarios del día", font = ("Myanmar Khyay", 20))
-        Titulo.pack(side = tk.TOP, pady = 10)
-        Regresar = tk.Button(ventana, text = "Volver al menu", command = Menu_Habitante, font=("Myanmar Sans Pro", 10))
-        Regresar.pack(side = tk.TOP, pady = 10)
-
-        if not Horario:
-            Texto = tk.Label(ventana, text = "No hay horarios disponibles de momento", font = ("Myanmar Sans Pro",10))
-            Texto.pack(side = tk.TOP,pady = 10)
-        else:
-            for Ruta in Horario:
-                Empleado = tk.Label(ventana, text = (Ruta['Empleado']))
-                Empleado.pack(side = tk.TOP, pady = 10)
-                Ubicacion = tk.Label(ventana, text = (Ruta['Ubicacion']))
-                Ubicacion.pack(side = tk.TOP, pady = 10)
-                Dir1 = tk.Label(ventana, text = (Ruta['Direccion1']))
-                Dir1.pack(side = tk.TOP, pady = 10)
-                Dir2 = tk.Label(ventana, text = (Ruta['Direccion2']))
-                Dir2.pack(side = tk.TOP, pady = 10)
-                Dir3 = tk.Label(ventana, text = (Ruta['Direccion3']))
-                Dir3.pack(side = tk.TOP, pady = 10)
-    
-    #A partir de aquí comienza la sección de empleados
-    #Como se puede ver, el empleado solo tendrá una función ya que solo tiene que ver el horario asignado
-    def Menu_Empleado():
-        for widget in ventana.winfo_children():
-            widget.destroy()
-        
-        Titulo = tk.Label(ventana, text = "Bienvenido Empleado", font = ("Myanmar Khyay", 15))
-        Titulo.pack(side = tk.TOP, pady = 10)
-
-        Cerrar = tk.Button(ventana, text = "Cerrar Sesión", command = Cerrar_Sesion)
-        Cerrar.pack(pady = 10)
-
-        if not Horario:
-            Texto = tk.Label(ventana, text = "No tiene un horario asignado de momento")
-            Texto.pack(side = tk.TOP, pady = 10)
-        else:
-            for Ruta in Horario:
-                if Ruta['Empleado'] == nomos:
-                    Emp = tk.Label(ventana, text = (Ruta['Empleado']))
-                    Emp.pack(side = tk.TOP, pady = 10)
-                    Ubicacion = tk.Label(ventana, text = (Ruta['Ubicacion']))
-                    Ubicacion.pack(side = tk.TOP, pady = 10)
-                    Dir1 = tk.Label(ventana, text = (Ruta['Direccion1']))
-                    Dir1.pack(side = tk.TOP, pady = 10)
-                    Dir2= tk.Label(ventana, text = (Ruta['Direccion2']))
-                    Dir2.pack(side = tk.TOP, pady = 10)
-                    Dir3 = tk.Label(ventana, text = (Ruta['Direccion3']))
-                    Dir3.pack(side = tk.TOP, pady = 10)
-
-    #El apartado del Administrador, de los más dificiles y importantes del programa
-    #Aquí depende gran parte del programa que son los horarios
-    def Menu_Admin():
-
-        for widget in ventana.winfo_children():
-            widget.destroy()
-    
-        Texto = tk.Label(ventana, text = "Bienvenido Administrador", font = ("Myanmar Khyay", 15))
-        Texto.pack(side = tk.TOP, pady = 10)
-        Horario = tk.Button(ventana, text = "Horarios", command = Ingresar_Horarios, font = ("Myanmar Sans Pro", 10))
-        Horario.pack(side = tk.TOP, pady = 10)
-        Actualizar = tk.Button(ventana, text = "Actualizar ubicación", command = Actualizar_Ubicacion, font = ("Myanmar Sans Pro", 10))
-        Actualizar.pack(side = tk.TOP, pady = 10)
-        Queja = tk.Button(ventana, text = "Quejas y sugerencias", command = Quejas, font = ("Myanmar Sans Pro", 10))
-        Queja.pack(side = tk.TOP, pady = 10)
-        Cerrar = tk.Button(ventana, text = "Cerrar Sesión", command = Cerrar_Sesion)
-        Cerrar.pack(side = tk.TOP, pady = 10)
-    
-    def Ingresar_Horarios():
-
-        for widget in ventana.winfo_children():
-            widget.destroy()
-        
-        def Asignar_Horarios():
-            logica_programa["Horarios"](Num, Partida, Calle2, Calle3, Calle4, Horario)
-            messagebox.showinfo("Digital Bell","Horario ingresado exitosamente")
-            Menu_Admin()
-
-        #Los horarios de este programa estarán compuestos por tres calles sin contar el comienzo
-        Texto = tk.Label(ventana, text = "Horarios y rutas")
-        Texto.pack(side = tk.TOP, pady = 5)
-        Texto1 = tk.Label(ventana, text = "Número de Empleado a asignar")
-        Texto1.pack(side = tk.TOP, pady = 5)
-        Num = tk.Entry(ventana)
-        Num.pack(side = tk.TOP, pady = 5)
-        Texto5 = tk.Label(ventana, text = "¿Por donde va a empezar el recorrido?")
-        Texto5.pack(side = tk.TOP, pady = 5)
-        Partida = tk.Entry(ventana)
-        Partida.pack(side = tk.TOP, pady = 5)
-        Texto2 = tk.Label(ventana, text = "Ingrese la segunda dirección")
-        Texto2.pack(side = tk.TOP, pady = 5)
-        Calle2 = tk.Entry(ventana)
-        Calle2.pack(side = tk.TOP, pady = 5)
-        Texto3 = tk.Label(ventana, text = "Ingrese la tercera dirección")
-        Texto3.pack(side = tk.TOP, pady = 5)
-        Calle3 = tk.Entry(ventana)
-        Calle3.pack(side = tk.TOP, pady = 5)
-        Texto4 = tk.Label(ventana, text = "Ingrese la cuarta dirección")
-        Texto4.pack(side = tk.TOP, pady = 5)
-        Calle4 = tk.Entry(ventana)
-        Calle4.pack(side = tk.TOP, pady = 5)
-
-        Asignar = tk.Button(ventana, text = "Asignar horarios", command = Asignar_Horarios)
-        Asignar.pack(side = tk.TOP, pady = 10)
-        Regresar = tk.Button(ventana, text = "Regresar", command = Menu_Admin)
-        Regresar.pack(side = tk.TOP, pady = 10)
-    
-    def Actualizar_Ubicacion():
-        
-        for widget in ventana.winfo_children():
-            widget.destroy()
-
-        def Actualizar():
-            logica_programa["Ac_Ubicacion"](Num, Ubicacion,Horario)
-            messagebox.showinfo("Digital Bell", "Ubicación actualizada exitosamente")
-            Menu_Admin()
-
-        Texto = tk.Label(ventana, text = "Ingrese el número de empleado")
-        Texto.pack(side = tk.TOP, pady = 10)
-        Num = tk.Entry(ventana)
-        Num.pack(side = tk.TOP, pady = 10)
-        Texto1 = tk.Label(ventana, text = "Ingrese su ubicación actual")
-        Texto1.pack(side = tk.TOP, pady = 10)
-        Ubicacion = tk.Entry(ventana)
-        Ubicacion.pack(side = tk.TOP, pady = 10)
-        Cambia = tk.Button(ventana, text = "Actualizar ubicación", command = Actualizar)
-        Cambia.pack(side = tk.TOP, pady = 10)
-        Regresar = tk.Button(ventana, text = "Regresar", command = Menu_Admin)
-        Regresar.pack(side = tk.TOP, pady = 10)
-    
-    #Este es diferente al de Queja_Habitante ya que este en lugar de registrarlas las muestra unicamente al Administrador
-    def Quejas():
-        global Queja
-
-        for widget in ventana.winfo_children():
-            widget.destroy()
-    
-        Titulo = tk.Label(ventana, text = "Quejas y sugerencias")
-        Titulo.pack(side = tk.TOP)
-        Regresar = tk.Button(ventana, text = "Volver al menu", command = Menu_Admin)
-        Regresar.pack(side = tk.TOP, pady = 10)
-        if not Queja:
-            Texto = tk.Label(ventana, text = "No hay quejas de momento", font = ("Myanmar Sans Pro",10))
-            Texto.pack(side = tk.TOP,pady = 10)
-        else:
-            for quejas in Queja:
-                Usuario = tk.Label(ventana, text = quejas['Usuario'])
-                Usuario.pack(side = tk.TOP, pady = 10)
-                Sugerencia = tk.Label(ventana, text = quejas['Queja'])
-                Sugerencia.pack(side = tk.TOP, pady = 10)
-
-
-    #Esta función es exclusivamente para cerrar sesión y volver al menu principal
-    def Cerrar_Sesion():
-        global nomos
-        Cerrar_Sesion = messagebox.askyesno("Digital Bell", "¿Desea cerrar sesión?")
-        if Cerrar_Sesion:
-            nomos = ""
-            Menu()
-        else:
-            messagebox.showinfo("Digital Bell", "No se pudo cerrar sesión")
-    
-    Texto = tk.Label(ventana, text = "Bienvenid@ a Digital Bell", font = ("Myanmar Khyay",20))
-    Texto.pack(side = tk.TOP, pady = 10)
-    Registra = tk.Button(ventana, text = "Crear cuenta", command = Registro, font = ("Myanmar Sans Pro", 15))
-    Registra.pack(side = tk.TOP, pady = 10,padx = 10)
-    Sesion = tk.Button(ventana, text = "Iniciar Sesión", command = Iniciar_Sesion, font = ("Myanmar Sans Pro", 15))
-    Sesion.pack(side = tk.TOP, pady = 10,padx = 10)
-    Salir = tk.Button(ventana, text = "Salir", command = ventana.quit, font = ("Myanmar Sans Pro", 15))
-    Salir.pack(pady = 5)
-
-=======
 import tkinter as tk
 from tkinter import messagebox,ttk
 Usuario = []
@@ -466,6 +55,7 @@ def crear_interfaz(logica_programa):
 
         Empleado = tk.Button(botones_frame, text="Empleado", command=lambda: Registrar_Usuario(tipo="Empleado"), font=("Myanmar Sans Pro", 15))
         Empleado.pack(side=tk.RIGHT, padx=50)
+    
     
     def Registrar_Usuario(tipo):
         for widget in ventana.winfo_children():
@@ -787,21 +377,21 @@ def crear_interfaz(logica_programa):
         Regresar = tk.Button(frame, text="Volver al menu", command=Menu_Habitante, font=("Myanmar Sans Pro", 10), bg="red", fg="white")
         Regresar.pack(side=tk.TOP, pady=10)
 
-        if not Horario:  # Cambié la variable para mantener consistencia
-            Texto = tk.Label(frame, text="No hay horarios disponibles de momento", font=("Myanmar Sans Pro", 10), bg="black", fg="white")
-            Texto.pack(side=tk.TOP, pady=10)
-
+        if not Horario:
+            Texto = tk.Label(ventana, text = "No hay horarios disponibles de momento", font = ("Myanmar Sans Pro",10))
+            Texto.pack(side = tk.TOP,pady = 10)
         else:
             for Ruta in Horario:
-                Empleado = tk.Label(ventana, text = ("Empleado asignado: ",Ruta['Empleado']))
-                Empleado.pack(side = tk.TOP, pady = 5)
-                Tabla.heading("Comienzo", text="Ubicación")
-                Tabla.heading("Dir1", text="Dirección 1")
-                Tabla.heading("Dir2", text="Dirección 2")
-                Tabla.heading("Dir3", text="Dirección 3")
-                for Ruta['Empleado'] in  Horario:
-                    Tabla.insert("", tk.END, values=(Ruta["Nombre"], Ruta["Direccion1"], Ruta["Direccion2"],Ruta['Direccion3']))
-                    Tabla = ttk.Treeview(ventana, columns=("Comienzo", "Dir2", "Dir3","Dir4"), show='headings')
+                Empleado = tk.Label(ventana, text = (Ruta['Empleado']))
+                Empleado.pack(side = tk.TOP, pady = 10)
+                Ubicacion = tk.Label(ventana, text = (Ruta['Ubicacion']))
+                Ubicacion.pack(side = tk.TOP, pady = 10)
+                Dir1 = tk.Label(ventana, text = (Ruta['Direccion1']))
+                Dir1.pack(side = tk.TOP, pady = 10)
+                Dir2 = tk.Label(ventana, text = (Ruta['Direccion2']))
+                Dir2.pack(side = tk.TOP, pady = 10)
+                Dir3 = tk.Label(ventana, text = (Ruta['Direccion3']))
+                Dir3.pack(side = tk.TOP, pady = 10)
     
     #A partir de aquí comienza la sección de empleados
     #Como se puede ver, el empleado solo tendrá una función ya que solo tiene que ver el horario asignado
@@ -827,25 +417,22 @@ def crear_interfaz(logica_programa):
         Cerrar = tk.Button(frame, text="Cerrar Sesión", command=Cerrar_Sesion, bg="red", fg="white")
         Cerrar.pack(pady=10)
 
-        if not Horario:  # Cambié la variable para mantener consistencia
-            Texto = tk.Label(frame, text="No tiene un horario asignado de momento", bg="black", fg="white")
-            Texto.pack(side=tk.TOP, pady=10)
-
+        if not Horario:
+            Texto = tk.Label(ventana, text = "No tiene un horario asignado de momento")
+            Texto.pack(side = tk.TOP, pady = 10)
         else:
-            if not Horario:
-                Texto = tk.Label(ventana, text = "No hay horarios disponibles de momento", font = ("Myanmar Sans Pro",10))
-                Texto.pack(side = tk.TOP,pady = 10)
-            else:
-                for Ruta in Horario:
-                    Empleado = tk.Label(ventana, text = ("Empleado asignado: ",Ruta['Empleado']), bg="green")
-                    Empleado.pack(side = tk.TOP, pady = 5)
-                    Tabla = ttk.Treeview(ventana, columns=("Comienzo", "Dir2", "Dir3","Dir4"), show='headings')
-                    Tabla.heading("Comienzo", text="Ubicación")
-                    Tabla.heading("Dir1", text="Dirección 1")
-                    Tabla.heading("Dir2", text="Dirección 2")
-                    Tabla.heading("Dir3", text="Dirección 3")
-                    for Ruta['Empleado'] in  Horario:
-                        Tabla.insert("", tk.END, values=(Ruta["Nombre"], Ruta["Direccion1"], Ruta["Direccion2"],Ruta['Direccion3']))
+            for Ruta in Horario:
+                if Ruta['Empleado'] == nomos:
+                    Emp = tk.Label(ventana, text = (Ruta['Empleado']))
+                    Emp.pack(side = tk.TOP, pady = 10)
+                    Ubicacion = tk.Label(ventana, text = (Ruta['Ubicacion']))
+                    Ubicacion.pack(side = tk.TOP, pady = 10)
+                    Dir1 = tk.Label(ventana, text = (Ruta['Direccion1']))
+                    Dir1.pack(side = tk.TOP, pady = 10)
+                    Dir2= tk.Label(ventana, text = (Ruta['Direccion2']))
+                    Dir2.pack(side = tk.TOP, pady = 10)
+                    Dir3 = tk.Label(ventana, text = (Ruta['Direccion3']))
+                    Dir3.pack(side = tk.TOP, pady = 10)
 
     #El apartado del Administrador, de los más dificiles y importantes del programa
     #Aquí depende gran parte del programa que son los horarios
@@ -954,7 +541,7 @@ def crear_interfaz(logica_programa):
         Num.pack(side = tk.TOP, pady = 10)
         Texto1 = tk.Label(ventana, text = "Ingrese su ubicación actual")
         Texto1.pack(side = tk.TOP, pady = 10)
-        Ubicacion = tk.Label(ventana)
+        Ubicacion = tk.Entry(ventana)
         Ubicacion.pack(side = tk.TOP, pady = 10)
         Cambia = tk.Button(ventana, text = "Actualizar ubicación", command = Actualizar,bg="green",fg="white")
         Cambia.pack(side = tk.TOP, pady = 10)
@@ -1012,5 +599,4 @@ def crear_interfaz(logica_programa):
 
     Salir = tk.Button(frame, text="Salir", command=ventana.quit, font=("Myanmar Sans Pro", 15),bg="red",fg="white")
     Salir.pack(pady=5)
->>>>>>> 50ff8ac17f2339123c6fb408087a9b286b846b1d
     ventana.mainloop()
