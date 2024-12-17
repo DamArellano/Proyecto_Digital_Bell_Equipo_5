@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 def AsH(Num,Partida,Calle2,Calle3,Calle4,Horario):
     Numero = Num.get()
     Ubicacion = Partida.get()
@@ -20,4 +21,29 @@ def Ubicacion(Num,Ubicacion,Horario):
     for Ruta in Horario:
         if Ruta["Empleado"] == Numero:
             Ruta["Ubicacion"] = Ubicacion
+=======
+def AsH(Num,Partida,Calle2,Calle3,Calle4,Horario):
+    Numero = Num.get()
+    Ubicacion = Partida.get()
+    Dir1 = Calle2.get()
+    Dir2 = Calle3.get()
+    Dir3 = Calle4.get()
+    Ruta = {
+        "Empleado": Numero,
+        "Ubicacion": Ubicacion,
+        "Direccion1": Dir1,
+        "Direccion2": Dir2,
+        "Direccion3": Dir3
+    }
+
+    Horario.append(Ruta)
+
+def Ubicacion(Ruta,Num,Ubicacion,Horario):
+    Ruta = Ruta.get()
+    Numero = Num.get()
+    Ubicacion = Ubicacion.get()
+    for Ruta in Horario:
+        if Ruta["Empleado"] == Numero:
+            Ruta["Ubicacion"] = Ubicacion
+>>>>>>> 50ff8ac17f2339123c6fb408087a9b286b846b1d
     return
